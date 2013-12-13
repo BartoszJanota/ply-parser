@@ -2,6 +2,7 @@
 
 from scanner import Scanner
 from AST import *
+import TreePrinter
 
 
 
@@ -41,6 +42,9 @@ class Cparser(object):
     
     def p_program(self, p):
         """program : declarations fundefs instructions"""
+        print p[1]
+        print p[2]
+        print p[3]
     
     def p_declarations(self, p):
         """declarations : declarations declaration
@@ -63,9 +67,14 @@ class Cparser(object):
 
     
     def p_instructions(self, p):
-        """instructions : instructions instruction
-                        | instruction """
+        """instructions : instructions instruction"""
+        p[0] = InstructionList(p[1].instrs + [ p[2] ])
     
+    def p_instructions_single(self, p):
+        """instructions : instruction """
+        #print 'Captured instruction list with a single item = ', p[1]
+        p[0] = InstructionList([ p[1] ])
+
     
     def p_instruction(self, p):
         """instruction : print_instr
@@ -78,11 +87,15 @@ class Cparser(object):
                        | break_instr
                        | continue_instr
                        | compound_instr"""
+        p[0] = p[1]
     
     
     def p_print_instr(self, p):
-        """print_instr : PRINT expression ';'
-                       | PRINT error ';' """
+        """print_instr : PRINT expression ';' """
+        #print 'Captured print instruction'
+        p[0] = SimpleInstruction(p[1], p[2])
+
+    #### TODO                   | PRINT error ';' """
     
     
     def p_labeled_instr(self, p):
@@ -142,13 +155,14 @@ class Cparser(object):
     
     def p_expression_const(self, p):
         """expression : const"""
+        p[0] = p[1]
 
     def p_expression_id(self, p):
-        "expression: ID"
+        "expression : ID"
         p[0] = Variable(p[1])
 
     def p_expression_brackets(self, p):
-        "expression: '(' expression ')'"
+        "expression : '(' expression ')'"
         p[0] = p[2]
 
     #### TODO ????                  | '(' error ')'
@@ -156,7 +170,7 @@ class Cparser(object):
     #### TODO ??? | ID '(' error ')' """
 
     def p_expression_fun_call(self, p):
-        "expression:  ID '(' expr_list_or_empty ')'"
+        "expression : ID '(' expr_list_or_empty ')'"
         p[0] = FunctionCall(p[1], p[3])
     
     
@@ -183,17 +197,21 @@ class Cparser(object):
         p[0] = BinExpr(p[1], p[2], p[3])
 
     
-    def p_expr_list_or_empty(self, p):
-        """expr_list_or_empty : expr_list
-                              | """
+    def p_expr_list_non_empty(self, p):
+        """expr_list_or_empty : expr_list"""
+        p[0] = p[1]
+
+    def p_expr_list_empty(self, p):
+        """expr_list_or_empty : """
+        p[0] = ExprList([])
     
     def p_expr_list(self, p):
         """expr_list : expr_list ',' expression"""
-        p[0] = ExprList(p[1], p[3])
+        p[0] = ExprList(p[1].exprs + [ p[3] ])
     
     def p_expr_list_single(self, p):
         """expr_list : expression"""   
-        p[0] = ExprList([], p[1])
+        p[0] = ExprList([ p[1] ])
     
     
     def p_fundefs(self, p):

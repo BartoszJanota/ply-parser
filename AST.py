@@ -35,13 +35,20 @@ class BinExpr(Node):
     print(left, op, right)
 
 class ExprList(Node):
-  def __init__(self, list, expr):
-    self.list = list
-    self.expr = expr
-
-class FunctionCall(Node):
-  def __init__(self, id, exprs):
-    self.id = id
+  def __init__(self, exprs):
     self.exprs = exprs
 
+class FunctionCall(Node):
+  def __init__(self, id, params):
+    self.id = id
+    self.params = params
+
+class InstructionList(Node):
+  def __init__(self, instrs):
+    self.instrs = instrs
+
+class SimpleInstruction(Node):
+  def __init__(self, kw, expr):
+    self.keyword = kw
+    self.expr = expr
 

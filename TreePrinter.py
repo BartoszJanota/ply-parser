@@ -20,7 +20,27 @@ class TreePrinter:
     @addToClass(AST.BinExpr)
     def printTree(self):
         pass
-        # ...
+        # TODO
 
-    # @addToClass ...
-    # ...
+    @addToClass(AST.Const)
+    def printTree(self):
+        return str(self.value)
+
+    @addToClass(AST.ExprList)
+    def printTree(self):
+      return ', '.join(str(expr) for expr in self.exprs)
+
+    @addToClass(AST.FunctionCall)
+    def printTree(self):
+      #print 'Function call', self.params
+      return 'FUNCALL ' + str(self.params)
+
+    @addToClass(AST.InstructionList)
+    def printTree(self):
+      return '\n'.join(str(instr) for instr in self.instrs)
+
+    @addToClass(AST.SimpleInstruction)
+    def printTree(self):
+      return self.keyword + ' ' + str(self.expr)
+
+
