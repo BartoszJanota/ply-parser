@@ -1,3 +1,6 @@
 
-print foo(555);
+print foo(5.12);
+print bar(3 + 8, "abc");
+
+print qux(hello);
 

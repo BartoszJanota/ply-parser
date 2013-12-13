@@ -19,8 +19,7 @@ class TreePrinter:
 
     @addToClass(AST.BinExpr)
     def printTree(self):
-        pass
-        # TODO
+      return self.op + ' ' + str(self.left) + ' ' + str(self.right)
 
     @addToClass(AST.Const)
     def printTree(self):
@@ -33,7 +32,7 @@ class TreePrinter:
     @addToClass(AST.FunctionCall)
     def printTree(self):
       #print 'Function call', self.params
-      return 'FUNCALL ' + str(self.params)
+      return 'FUNCALL ' + self.id + ' ' + str(self.params)
 
     @addToClass(AST.InstructionList)
     def printTree(self):
@@ -43,4 +42,7 @@ class TreePrinter:
     def printTree(self):
       return self.keyword + ' ' + str(self.expr)
 
+    @addToClass(AST.Variable)
+    def printTree(self):
+      return self.id
 

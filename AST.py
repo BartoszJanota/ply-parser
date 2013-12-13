@@ -23,7 +23,8 @@ class String(Const):
 
 
 class Variable(Node):
-    pass
+  def __init__(self, id):
+    self.id = id
 
 
 
