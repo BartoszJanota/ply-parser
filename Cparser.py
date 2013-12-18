@@ -41,30 +41,45 @@ class Cparser(object):
     
     
     def p_program(self, p):
-        """program : declarations fundefs instructions"""
-        print p[1]
-        print p[2]
-        print p[3]
+        """program : ext_declarations fundefs instructions"""
+        #print str(p[1]) + str(p[2]) + str(p[3])
+        print str(p[1]) #+ " declarations"
+        print str(p[2]) #+ " fundefs"
+        print str(p[3]) #+ " instructions"
     
+    def p_ext_declarations(self,p):
+        """ext_declarations : declarations
+                            | """
+        p[0] = 'DECL ' + str(p[1])
+
+    #todo: fix it
     def p_declarations(self, p):
-        """declarations : declarations declaration
+        """declarations : declarations declaration"""
+        p[0] = DeclarationList(p[1].decls + [ p[2] ])
+    
+    def p_declarations_single(self, p):
+        """declarations : declaration
                         | """
+        p[0] = DeclarationList([ p[1] ])
                      
     
     def p_declaration(self, p):
         """declaration : TYPE inits ';' 
-                       | error ';' """
-
+                       """
+                       #| error ';' """
+        p[0] = Declaration(p[1], p[2])
 
     def p_inits(self, p):
-        """inits : inits ',' init
-                 | init """
+        """inits : inits ',' init"""
+        p[0] = InitList(p[1].inits + [ p[3] ])
 
+    def p_inits_single(self, p):
+        """inits : init"""
+        p[0] = InitList([ p[1] ])
 
     def p_init(self, p):
         """init : ID '=' expression """
-
-
+        p[0] = Init(p[1], p[2], p[3])
     
     def p_instructions(self, p):
         """instructions : instructions instruction"""

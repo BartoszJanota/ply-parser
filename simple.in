@@ -1,3 +1,4 @@
+float a = 0, b = 1, c = 3;
 
 print foo(5.12);
 print bar(3 + 8, "abc");

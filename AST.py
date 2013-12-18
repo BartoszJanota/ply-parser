@@ -33,7 +33,7 @@ class BinExpr(Node):
     self.left = left
     self.op = op
     self.right = right
-    print(left, op, right)
+    #sprint(left, op, right)
 
 class ExprList(Node):
   def __init__(self, exprs):
@@ -53,3 +53,21 @@ class SimpleInstruction(Node):
     self.keyword = kw
     self.expr = expr
 
+class DeclarationList(Node):
+  def __init__(self, decls):
+    self.decls = decls
+
+class Declaration(Node):
+  def __init__(self, kw, exprs):
+    self.keyword = kw
+    self.exprs = exprs
+
+class InitList(Node):
+  def __init__(self, inits):
+    self.inits = inits
+
+class Init(Node):
+  def __init__(self, kw, op, expr):
+    self.keyword = kw
+    self.op = op
+    self.expr = expr 

@@ -46,3 +46,19 @@ class TreePrinter:
     def printTree(self):
       return self.id
 
+    @addToClass(AST.DeclarationList)
+    def printTree(self):
+      return '\n'.join(str(decl) for decl in self.decls)
+
+    @addToClass(AST.Declaration)
+    def printTree(self):
+      return self.keyword + ' ' + str(self.exprs)
+
+    @addToClass(AST.InitList)
+    def printTree(self):
+      return ', '.join(str(init) for init in self.inits)
+
+    @addToClass(AST.Init)
+    def printTree(self):
+      return self.op + ' ' + self.keyword + ' ' + str(self.expr)    
+
