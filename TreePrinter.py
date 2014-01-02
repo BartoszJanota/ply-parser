@@ -9,56 +9,71 @@ def addToClass(cls):
         return func
     return decorator
 
+def tprint(l, s):
+  print "| " * l + s
 
 class TreePrinter:
 
     @addToClass(AST.Node)
-    def printTree(self):
+    def printTree(self, l):
         raise Exception("printTree not defined in class " + self.__class__.__name__)
 
 
     @addToClass(AST.BinExpr)
-    def printTree(self):
-      return self.op + ' ' + str(self.left) + ' ' + str(self.right)
+    def printTree(self, l):
+      tprint(l, self.op)
+      self.left.printTree(l+1)
+      self.right.printTree(l+1)
 
     @addToClass(AST.Const)
-    def printTree(self):
-        return str(self.value)
+    def printTree(self, l):
+        tprint(l, self.value)
 
     @addToClass(AST.ExprList)
-    def printTree(self):
-      return ', '.join(str(expr) for expr in self.exprs)
+    def printTree(self, l):
+      for expr in self.exprs:
+        expr.printTree(l+1)
 
     @addToClass(AST.FunctionCall)
-    def printTree(self):
+    def printTree(self, l):
       #print 'Function call', self.params
-      return 'FUNCALL ' + self.id + ' ' + str(self.params)
+      tprint(l, 'FUNCALL ')
+      tprint(l+1, self.id)
+      self.params.printTree(l+1)
 
     @addToClass(AST.InstructionList)
-    def printTree(self):
-      return '\n'.join(str(instr) for instr in self.instrs)
+    def printTree(self, l):
+      for instr in self.instrs:
+        instr.printTree(l+1)
 
     @addToClass(AST.SimpleInstruction)
-    def printTree(self):
-      return self.keyword + ' ' + str(self.expr)
+    def printTree(self, l):
+      tprint(l, self.keyword.upper())
+      self.expr.printTree(l+1)
 
     @addToClass(AST.Variable)
-    def printTree(self):
-      return self.id
+    def printTree(self, l):
+      tprint(l, self.id)
 
     @addToClass(AST.DeclarationList)
-    def printTree(self):
-      return '\n'.join(str(decl) for decl in self.decls)
+    def printTree(self, l):
+      for decl in self.decls:
+        decl.printTree(l+1)
 
     @addToClass(AST.Declaration)
-    def printTree(self):
-      return self.keyword + ' ' + str(self.exprs)
+    def printTree(self, l):
+      tprint(l, 'DECL')
+      tprint(l+1, self.type)
+      self.inits.printTree(l+1)
 
     @addToClass(AST.InitList)
-    def printTree(self):
-      return ', '.join(str(init) for init in self.inits)
+    def printTree(self, l):
+      for init in self.inits:
+        init.printTree(l+1)
 
     @addToClass(AST.Init)
-    def printTree(self):
-      return self.op + ' ' + self.keyword + ' ' + str(self.expr)    
+    def printTree(self, l):
+      tprint(l, '=')
+      tprint(l+1, self.id)
+      self.expr.printTree(l+1)
 

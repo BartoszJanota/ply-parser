@@ -43,9 +43,9 @@ class Cparser(object):
     def p_program(self, p):
         """program : ext_declarations fundefs instructions"""
         #print str(p[1]) + str(p[2]) + str(p[3])
-        print str(p[1]) #+ " declarations"
-        print str(p[2]) #+ " fundefs"
-        print str(p[3]) #+ " instructions"
+        print p[1]  #+ " declarations"
+        print p[2] #+ " fundefs"
+        p[3].draw() #+ " instructions"
     
     def p_ext_declarations(self,p):
         """ext_declarations : declarations
@@ -79,7 +79,7 @@ class Cparser(object):
 
     def p_init(self, p):
         """init : ID '=' expression """
-        p[0] = Init(p[1], p[2], p[3])
+        p[0] = Init(p[1], p[3])
     
     def p_instructions(self, p):
         """instructions : instructions instruction"""

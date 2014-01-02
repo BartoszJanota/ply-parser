@@ -1,8 +1,7 @@
 
 class Node(object):
-
-    def __str__(self):
-        return self.printTree()
+  def draw(self):
+      self.printTree(0)
 
 
 class Const(Node):
@@ -58,16 +57,15 @@ class DeclarationList(Node):
     self.decls = decls
 
 class Declaration(Node):
-  def __init__(self, kw, exprs):
-    self.keyword = kw
-    self.exprs = exprs
+  def __init__(self, type, inits):
+    self.type = type
+    self.inits = inits
 
 class InitList(Node):
   def __init__(self, inits):
     self.inits = inits
 
 class Init(Node):
-  def __init__(self, kw, op, expr):
-    self.keyword = kw
-    self.op = op
+  def __init__(self, id, expr):
+    self.id = id
     self.expr = expr 
