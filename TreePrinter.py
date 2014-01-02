@@ -32,7 +32,7 @@ class TreePrinter:
     @addToClass(AST.ExprList)
     def printTree(self, l):
       for expr in self.exprs:
-        expr.printTree(l+1)
+        expr.printTree(l)
 
     @addToClass(AST.FunctionCall)
     def printTree(self, l):
@@ -44,7 +44,7 @@ class TreePrinter:
     @addToClass(AST.InstructionList)
     def printTree(self, l):
       for instr in self.instrs:
-        instr.printTree(l+1)
+        instr.printTree(l)
 
     @addToClass(AST.SimpleInstruction)
     def printTree(self, l):
@@ -58,7 +58,7 @@ class TreePrinter:
     @addToClass(AST.DeclarationList)
     def printTree(self, l):
       for decl in self.decls:
-        decl.printTree(l+1)
+        decl.printTree(l)
 
     @addToClass(AST.Declaration)
     def printTree(self, l):

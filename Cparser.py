@@ -43,14 +43,14 @@ class Cparser(object):
     def p_program(self, p):
         """program : ext_declarations fundefs instructions"""
         #print str(p[1]) + str(p[2]) + str(p[3])
-        print p[1]  #+ " declarations"
+        p[1].draw()  #+ " declarations"
         print p[2] #+ " fundefs"
         p[3].draw() #+ " instructions"
     
     def p_ext_declarations(self,p):
         """ext_declarations : declarations
                             | """
-        p[0] = 'DECL ' + str(p[1])
+        p[0] = p[1]
 
     #todo: fix it
     def p_declarations(self, p):
