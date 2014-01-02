@@ -1,7 +1,7 @@
 
 class Node(object):
   def draw(self):
-      self.printTree(0)
+    self.printTree(0)
 
 
 class Const(Node):
@@ -43,6 +43,17 @@ class FunctionCall(Node):
     self.id = id
     self.params = params
 
+class FunctionDefList(Node):
+  def __init__(self, fundefs):
+    self.fundefs = fundefs
+
+class FunctionDef(Node):
+  def __init__(self, rettype, name, fmlparams, body):
+    self.rettype = rettype
+    self.name = name
+    self.fmlparams = fmlparamas
+    self.body = body
+
 class InstructionList(Node):
   def __init__(self, instrs):
     self.instrs = instrs
@@ -69,3 +80,4 @@ class Init(Node):
   def __init__(self, id, expr):
     self.id = id
     self.expr = expr 
+

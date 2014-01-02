@@ -42,10 +42,9 @@ class Cparser(object):
     
     def p_program(self, p):
         """program : ext_declarations fundefs instructions"""
-        #print str(p[1]) + str(p[2]) + str(p[3])
-        p[1].draw()  #+ " declarations"
-        print p[2] #+ " fundefs"
-        p[3].draw() #+ " instructions"
+        p[1].draw()  
+        p[2].draw()
+        p[3].draw() 
     
     def p_ext_declarations(self,p):
         """ext_declarations : declarations
@@ -230,11 +229,16 @@ class Cparser(object):
     
     
     def p_fundefs(self, p):
-        """fundefs : fundef fundefs
-                   |  """
+        """fundefs : fundefs fundef"""
+        p[0] = FunctionDefList(p[1].fundefs + [ p[2] ])
+
+    def p_fundefs_empty(self, p):
+        """fundefs : """
+        p[0] = FunctionDefList([])
 
     def p_fundef(self, p):
         """fundef : TYPE ID '(' args_list_or_empty ')' compound_instr """
+        ## TODO: use FunctionDef class
     
     
     def p_args_list_or_empty(self, p):

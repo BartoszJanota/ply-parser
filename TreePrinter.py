@@ -66,6 +66,11 @@ class TreePrinter:
       tprint(l+1, self.type)
       self.inits.printTree(l+1)
 
+    @addToClass(AST.FunctionDefList)
+    def printTree(self, l):
+      for fundef in self.fundefs:
+        fundef.printTree(l)
+
     @addToClass(AST.InitList)
     def printTree(self, l):
       for init in self.inits:
