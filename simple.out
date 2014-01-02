@@ -1,0 +1,36 @@
+DECL
+| float
+| | =
+| | | a
+| | | 0
+| | =
+| | | b
+| | | 1
+| | =
+| | | c
+| | | 3
+PRINT
+| FUNCALL 
+| | foo
+| | 5.12
+PRINT
+| FUNCALL 
+| | bar
+| | +
+| | | 3
+| | | 8
+| | "abc"
+PRINT
+| FUNCALL 
+| | baz
+| | !=
+| | | 3
+| | | 5
+| | *
+| | | "abc"
+| | | how_many
+| | Whatchamacallit
+PRINT
+| FUNCALL 
+| | qux
+| | hello
