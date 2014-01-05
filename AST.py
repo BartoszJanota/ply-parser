@@ -25,8 +25,6 @@ class Variable(Node):
   def __init__(self, id):
     self.id = id
 
-
-
 class BinExpr(Node):
   def __init__(self, left, op, right):
     self.left = left
@@ -79,5 +77,11 @@ class InitList(Node):
 class Init(Node):
   def __init__(self, id, expr):
     self.id = id
-    self.expr = expr 
+    self.expr = expr
+
+class WhileInstruction(Node):
+  def __init__(self, kw, cond, instr):
+    self.keyword = kw
+    self.cond = cond
+    self.instr = instr 
 

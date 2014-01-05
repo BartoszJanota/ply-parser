@@ -18,7 +18,6 @@ class TreePrinter:
     def printTree(self, l):
         raise Exception("printTree not defined in class " + self.__class__.__name__)
 
-
     @addToClass(AST.BinExpr)
     def printTree(self, l):
       tprint(l, self.op)
@@ -81,4 +80,11 @@ class TreePrinter:
       tprint(l, '=')
       tprint(l+1, self.id)
       self.expr.printTree(l+1)
+
+    @addToClass(AST.WhileInstruction)
+    def printTree(self, l):
+      tprint(l, self.keyword.upper())
+      #tprint(l, self.cond)
+      self.cond.printTree(l+1)
+      self.instr.printTree(l+1)
 

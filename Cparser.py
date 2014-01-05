@@ -47,8 +47,7 @@ class Cparser(object):
         p[3].draw() 
     
     def p_ext_declarations(self,p):
-        """ext_declarations : declarations
-                            | """
+        """ext_declarations : declarations"""
         p[0] = p[1]
 
     #todo: fix it
@@ -57,8 +56,7 @@ class Cparser(object):
         p[0] = DeclarationList(p[1].decls + [ p[2] ])
     
     def p_declarations_single(self, p):
-        """declarations : declaration
-                        | """
+        """declarations : declaration"""
         p[0] = DeclarationList([ p[1] ])
                      
     
@@ -89,7 +87,10 @@ class Cparser(object):
         #print 'Captured instruction list with a single item = ', p[1]
         p[0] = InstructionList([ p[1] ])
 
-    
+    def p_instruction_brackets(self,p):
+        """instruction : '{' instruction '}'"""
+        p[0] = p[2]
+
     def p_instruction(self, p):
         """instruction : print_instr
                        | labeled_instr
@@ -129,8 +130,10 @@ class Cparser(object):
     
     
     def p_while_instr(self, p):
-        """while_instr : WHILE '(' condition ')' instruction
-                       | WHILE '(' error ')' instruction """
+        """while_instr : WHILE '(' condition ')' instruction"""
+                       #| WHILE '(' error ')' instruction """
+        print("captured while")
+        p[0] = WhileInstruction(p[1], p[3], p[5])
 
 
     def p_repeat_instr(self, p):
@@ -153,6 +156,7 @@ class Cparser(object):
     
     def p_condition(self, p):
         """condition : expression"""
+        p[0] = p[1]
 
 
     def p_const_integer(self, p):
