@@ -94,3 +94,13 @@ class CompoundInstructions(Node):
     self.decls = decls
     self.instrs = instrs
 
+class Assingment(Node):
+  def __init__(self, id, expr):
+    self.id = id
+    self.expr = expr
+
+class LabeledInstruction(Node):
+  def __init__(self, kw, instr):
+    self.keyword = kw
+    self.instr = instr
+

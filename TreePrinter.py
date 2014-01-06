@@ -96,3 +96,15 @@ class TreePrinter:
     def printTree(self, l):
       self.decls.printTree(l)
       self.instrs.printTree(l)
+
+    @addToClass(AST.Assingment)
+    def printTree(self, l):
+      tprint(l, '=')
+      tprint(l+1, self.id)
+      self.expr.printTree(l+1)
+
+    @addToClass(AST.LabeledInstruction)
+    def printTree(self, l):
+      tprint(l, ':')
+      tprint(l+1, self.keyword)
+      self.instr.printTree(l+1)

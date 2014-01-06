@@ -15,5 +15,10 @@ while ( c >= 1 ){
 	break;
 	print "compound instructions";
 }
-
+	
 return b(a);
+
+a = b + c;
+
+label_1 : a = p;
+label_2 : print "w sumie to jak wypisywac labele?";

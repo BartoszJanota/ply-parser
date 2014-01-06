@@ -121,10 +121,11 @@ class Cparser(object):
     
     def p_labeled_instr(self, p):
         """labeled_instr : ID ':' instruction """
-    
+        p[0] = LabeledInstruction(p[1], p[3])
     
     def p_assignment(self, p):
         """assignment : ID '=' expression ';' """
+        p[0] = Assingment(p[1], p[3])
     
     
     def p_choice_instr(self, p):
