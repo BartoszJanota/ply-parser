@@ -9,6 +9,11 @@ DECL
 | | =
 | | | c
 | | | 3
+DECL
+| int
+| | =
+| | | d
+| | | 10
 PRINT
 | FUNCALL 
 | | foo
@@ -34,3 +39,36 @@ PRINT
 | FUNCALL 
 | | qux
 | | hello
+WHILE
+| >
+| | a
+| | 1
+| PRINT
+| | FUNCALL 
+| | | baba
+| | | 2
+WHILE
+| >=
+| | c
+| | 1
+| BREAK
+| PRINT
+| | "compound instructions"
+RETURN
+| FUNCALL 
+| | b
+| | a
+=
+| a
+| +
+| | b
+| | c
+:
+| label_1
+| =
+| | a
+| | p
+:
+| label_2
+| PRINT
+| | "w sumie to jak wypisywac labele?"
