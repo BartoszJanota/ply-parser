@@ -12,7 +12,8 @@ while ( a > 1 )
 	print baba(2);
 
 while ( c >= 1 ){
-	print brackets;
+	break;
+	print "compound instructions";
 }
 
-
+return b(a);

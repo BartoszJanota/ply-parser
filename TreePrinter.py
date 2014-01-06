@@ -88,3 +88,11 @@ class TreePrinter:
       self.cond.printTree(l+1)
       self.instr.printTree(l+1)
 
+    @addToClass(AST.KeyWordInstruction)
+    def printTree(self, l):
+      tprint(l, self.keyword.upper())
+
+    @addToClass(AST.CompoundInstructions)
+    def printTree(self, l):
+      self.decls.printTree(l)
+      self.instrs.printTree(l)

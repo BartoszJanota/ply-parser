@@ -57,8 +57,14 @@ class Cparser(object):
     
     def p_declarations_single(self, p):
         """declarations : declaration"""
+        #if p[1]:
         p[0] = DeclarationList([ p[1] ])
-                     
+        #else:
+        #  p[0] = DeclarationList([ ])
+
+    def p_declaration_blank(self, p):
+        """declarations : """
+        p[0] = DeclarationList([ ])                 
     
     def p_declaration(self, p):
         """declaration : TYPE inits ';' 
@@ -87,9 +93,9 @@ class Cparser(object):
         #print 'Captured instruction list with a single item = ', p[1]
         p[0] = InstructionList([ p[1] ])
 
-    def p_instruction_brackets(self,p):
-        """instruction : '{' instruction '}'"""
-        p[0] = p[2]
+    #def p_instruction_brackets(self,p):
+    #    """instruction : '{' instruction '}'"""
+    #    p[0] = p[2]
 
     def p_instruction(self, p):
         """instruction : print_instr
@@ -132,7 +138,6 @@ class Cparser(object):
     def p_while_instr(self, p):
         """while_instr : WHILE '(' condition ')' instruction"""
                        #| WHILE '(' error ')' instruction """
-        print("captured while")
         p[0] = WhileInstruction(p[1], p[3], p[5])
 
 
@@ -142,16 +147,19 @@ class Cparser(object):
     
     def p_return_instr(self, p):
         """return_instr : RETURN expression ';' """
+        p[0] = SimpleInstruction(p[1], p[2])
     
     def p_continue_instr(self, p):
         """continue_instr : CONTINUE ';' """
-    
+        p[0] = KeyWordInstruction(p[1])
+
     def p_break_instr(self, p):
         """break_instr : BREAK ';' """
-    
+        p[0] = KeyWordInstruction(p[1])    
     
     def p_compound_instr(self, p):
         """compound_instr : '{' declarations instructions '}' """
+        p[0] = CompoundInstructions(p[2], p[3])
 
     
     def p_condition(self, p):

@@ -83,5 +83,14 @@ class WhileInstruction(Node):
   def __init__(self, kw, cond, instr):
     self.keyword = kw
     self.cond = cond
-    self.instr = instr 
+    self.instr = instr
+
+class KeyWordInstruction(Node):
+  def __init__(self, kw):
+    self.keyword = kw 
+
+class CompoundInstructions(Node):
+  def __init__(self, decls, instrs):
+    self.decls = decls
+    self.instrs = instrs
 
