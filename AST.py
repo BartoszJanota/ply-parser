@@ -3,19 +3,19 @@ class Node(object):
   def draw(self):
     self.printTree(0)
 
+class ErrorNode(Node):
+    pass
+    
 
 class Const(Node):
   def __init__(self, value):
     self.value = value
 
-
 class Integer(Const):
     pass
 
-
 class Float(Const):
     pass
-
 
 class String(Const):
     pass

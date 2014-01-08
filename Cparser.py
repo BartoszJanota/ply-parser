@@ -37,7 +37,6 @@ class Cparser(object):
             print("Syntax error at line {0}, column {1}: LexToken({2}, '{3}')".format(p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
         else:
             print('At end of input')
-
     
     
     def p_program(self, p):
@@ -50,27 +49,26 @@ class Cparser(object):
         """ext_declarations : declarations"""
         p[0] = p[1]
 
-    #todo: fix it
     def p_declarations(self, p):
         """declarations : declarations declaration"""
         p[0] = DeclarationList(p[1].decls + [ p[2] ])
     
     def p_declarations_single(self, p):
         """declarations : declaration"""
-        #if p[1]:
         p[0] = DeclarationList([ p[1] ])
-        #else:
-        #  p[0] = DeclarationList([ ])
 
     def p_declaration_blank(self, p):
         """declarations : """
         p[0] = DeclarationList([ ])                 
     
     def p_declaration(self, p):
-        """declaration : TYPE inits ';' 
-                       """
-                       #| error ';' """
+        """declaration : TYPE inits ';' """
         p[0] = Declaration(p[1], p[2])
+                       
+    def p_declaration_error(self, p):
+        """declaration : error ';' """
+        print 'Error in declaration, line %d' % p[1].lineno
+        p[0] = DeclarationList([ ])                 
 
     def p_inits(self, p):
         """inits : inits ',' init"""
@@ -86,13 +84,19 @@ class Cparser(object):
     
     def p_instructions(self, p):
         """instructions : instructions instruction"""
-        p[0] = InstructionList(p[1].instrs + [ p[2] ])
+        if p[2]:
+          p[0] = InstructionList(p[1].instrs + [ p[2] ])
+        else:
+          p[0] = p[1]
     
     def p_instructions_single(self, p):
         """instructions : instruction """
-        #print 'Captured instruction list with a single item = ', p[1]
-        p[0] = InstructionList([ p[1] ])
+        if p[1]:
+          p[0] = InstructionList([ p[1] ])
+        else:
+          p[0] = InstructionList([ ])
 
+    # TODO - ???
     #def p_instruction_brackets(self,p):
     #    """instruction : '{' instruction '}'"""
     #    p[0] = p[2]
@@ -113,11 +117,11 @@ class Cparser(object):
     
     def p_print_instr(self, p):
         """print_instr : PRINT expression ';' """
-        #print 'Captured print instruction'
         p[0] = SimpleInstruction(p[1], p[2])
 
-    #### TODO                   | PRINT error ';' """
-    
+    def p_print_instr(self, p):
+        """print_instr : PRINT error ';' """
+        print 'Error in print instruction, line %d' % p[2].lineno
     
     def p_labeled_instr(self, p):
         """labeled_instr : ID ':' instruction """
