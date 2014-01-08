@@ -1,6 +1,8 @@
-Syntax error in declaration at line 1, column 4, at token LexToken(ID, decl_wrong_token)
-Syntax error in print instruction at line 7, column 11, at token LexToken(ID, print_wrong_token)
-Syntax error in while instruction at line 11, column 10, at token LexToken(STRING, "while_wrong_token")
+Syntax error in declaration at line 1, column 4, at token LexToken(ID, 'decl_wrong_token')
+Syntax error in print instruction at line 7, column 11, at token LexToken(ID, 'print_wrong_token')
+Syntax error in while instruction at line 11, column 10, at token LexToken(STRING, '"while_wrong_token"')
+Syntax error in expression (bracket) at line 16, column 10, at token LexToken(*, '*')
+Syntax error in function call at line 21, column 13, at token LexToken(ID, 'funcall_wrong_token')
 DECL
 | int
 | | =
@@ -18,3 +20,12 @@ PRINT
 | foo
 PRINT
 | third_correct
+WHILE
+| fourth_correct
+| PRINT
+| | "OK"
+=
+| fifth_correct
+| FUNCALL 
+| | foo
+| | bar
