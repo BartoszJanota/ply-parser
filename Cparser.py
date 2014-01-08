@@ -216,12 +216,14 @@ class Cparser(object):
         "expression : '(' error ')'"
         self.handle_error("expression (bracket)", p[2])
 
-    #### TODO ??? | ID '(' error ')' """
-
     def p_expression_fun_call(self, p):
         "expression : ID '(' expr_list_or_empty ')'"
+        print 'fun call'
         p[0] = FunctionCall(p[1], p[3])
     
+    def p_expression_fun_call_error(self, p):
+        "expression : ID '(' error ')'"
+        self.handle_error('function call', p[3])
     
     def p_expression_binary_op(self, p):
         """expression : expression '+' expression

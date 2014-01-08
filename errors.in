@@ -17,3 +17,7 @@ wrong = (*);
 
 while (fourth_correct)
   print "OK";
+
+qux = foo(6 funcall_wrong_token);
+
+fifth_correct = foo(bar);
