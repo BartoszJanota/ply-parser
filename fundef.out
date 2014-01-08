@@ -1,0 +1,16 @@
+DECL
+| int
+| | =
+| | | a
+| | | 1
+FUNDEF
+| foo
+| RET
+| | int
+| ARG
+| | int
+| | m
+| PRINT
+| | a
+PRINT
+| a

@@ -14,6 +14,15 @@ DECL
 | | =
 | | | d
 | | | 10
+FUNDEF
+| foo
+| RET
+| | int
+| ARG
+| | int
+| | m
+| PRINT
+| | fundef
 PRINT
 | FUNCALL 
 | | foo
@@ -51,9 +60,10 @@ WHILE
 | >=
 | | c
 | | 1
-| BREAK
 | PRINT
 | | "compound instructions"
+| CONTINUE
+| BREAK
 RETURN
 | FUNCALL 
 | | b
@@ -72,3 +82,13 @@ RETURN
 | label_2
 | PRINT
 | | "w sumie to jak wypisywac labele?"
+REPEAT
+| =
+| | a
+| | +
+| | | a
+| | | b
+UNTIL
+| <
+| | a
+| | 1

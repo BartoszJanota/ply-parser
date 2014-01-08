@@ -5,6 +5,7 @@ int foo(int m){
 	print fundef;
 }
 
+
 print foo(5.12);
 print bar(3 + 8, "abc");
 
@@ -16,8 +17,9 @@ while ( a > 1 )
 	print baba(2);
 
 while ( c >= 1 ) {
-	break;
 	print "compound instructions";
+  continue;
+	break;
 }
 	
 return b(a);

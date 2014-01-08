@@ -1,7 +1,13 @@
 int a = 1;
 
-int foo(int m){
-print a;
+int foo(int m) {
+    print a;
+}
+
+int foo(int m, string a) {
+  print a;
+  print foo(a);
 }
 
 print a;
+
