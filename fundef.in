@@ -1,0 +1,7 @@
+int a = 1;
+
+int foo(int m){
+print a;
+}
+
+print a;

@@ -118,3 +118,23 @@ class TreePrinter:
       self.instrs.printTree(l+1)
       tprint(l, self.kw_2.upper())
       self.cond.printTree(l+1)
+
+    @addToClass(AST.ArgsList)
+    def printTree(self, l):
+      for args in self.args:
+        args.printTree(l)
+
+    @addToClass(AST.Arg)
+    def printTree(self, l):
+      tprint(l, 'ARG')
+      tprint(l+1, self.type)
+      tprint(l+1, self.id)
+
+    @addToClass(AST.FunctionDef)
+    def printTree(self, l):
+      tprint(l, 'FUNDEF')
+      tprint(l+1, self.name)
+      tprint(l+1, 'RET')
+      tprint(l+2, self.rettype)
+      self.fmlparams.printTree(l+1)
+      self.body.printTree(l+1)

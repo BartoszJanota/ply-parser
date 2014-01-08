@@ -71,6 +71,10 @@ class Cparser(object):
         """declarations : """
         p[0] = DeclarationList([ ])                 
     
+    def p_declaration_fundef(self, p):
+        """declaration : fundefs"""
+        p[0] = p[1]
+
     def p_declaration(self, p):
         """declaration : TYPE inits ';' """
         p[0] = Declaration(p[1], p[2])
@@ -264,9 +268,21 @@ class Cparser(object):
         p[0] = ExprList([ p[1] ])
     
     
+    # def p_fundefs(self, p):
+    #     """fundefs : fundefs fundef
+    #                | fundef """
+    #     if p[2]:
+    #         p[0] = FunctionDefList(p[1].fundefs + [ p[2] ])
+    #     else:
+    #         p[0] = FunctionDefList([ p[1] ])
+
     def p_fundefs(self, p):
         """fundefs : fundefs fundef"""
         p[0] = FunctionDefList(p[1].fundefs + [ p[2] ])
+    
+    def p_fundefs_single(self, p):
+        """fundefs : fundef"""
+        p[0] = FunctionDefList([ p[1] ])
 
     def p_fundefs_empty(self, p):
         """fundefs : """
@@ -274,19 +290,36 @@ class Cparser(object):
 
     def p_fundef(self, p):
         """fundef : TYPE ID '(' args_list_or_empty ')' compound_instr """
-        ## TODO: use FunctionDef class
+        p[0] = FunctionDef(p[1], p[2], p[4], p[6])
     
     
     def p_args_list_or_empty(self, p):
         """args_list_or_empty : args_list
                               | """
+        if p[1]:
+            p[0] = p[1]
+        else:
+            p[0] = ArgsList([])
     
+    # def p_args_list(self, p):
+    #     """args_list : args_list ',' arg 
+    #                  | arg """
+    #     if p[3]:
+    #         p[0] = ArgsList(p[1].args + [ p[3] ])
+    #     else:
+    #         p[0] = ArgsList([ p[1] ])
+
     def p_args_list(self, p):
-        """args_list : args_list ',' arg 
-                     | arg """
+        """args_list : args_list ',' arg"""
+        p[0] = ArgsList(p[1].args + [ p[3] ])
     
+    def p_args_list_single(self, p):
+        """args_list : arg"""
+        p[0] = ArgsList([ p[1] ])
+
     def p_arg(self, p):
         """arg : TYPE ID """
+        p[0] = Arg(p[1], p[2])
 
 
     

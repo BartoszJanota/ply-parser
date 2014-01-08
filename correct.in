@@ -1,6 +1,10 @@
 float a = 0, b = 1, c = 3;
 int d = 10;
 
+int foo(int m){
+	print fundef;
+}
+
 print foo(5.12);
 print bar(3 + 8, "abc");
 

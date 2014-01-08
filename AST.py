@@ -49,7 +49,7 @@ class FunctionDef(Node):
   def __init__(self, rettype, name, fmlparams, body):
     self.rettype = rettype
     self.name = name
-    self.fmlparams = fmlparamas
+    self.fmlparams = fmlparams
     self.body = body
 
 class InstructionList(Node):
@@ -110,3 +110,12 @@ class RepeatInstruction(Node):
       self.kw_2 = kw_2
       self.instrs = instrs
       self.cond = cond
+
+class ArgsList(Node):
+  def __init__(self, args):
+    self.args = args
+
+class Arg(Node):
+  def __init__(self, type, id):
+    self.type = type
+    self.id = id
