@@ -1,16 +1,20 @@
-Syntax error at line 2, column 5: LexToken(ID, 'bar')
-Error in declaration, line 2
-Syntax error at line 4, column 11: LexToken(ID, 'bar')
-Error in print instruction, line 4
-Syntax error at line 8, column 10: LexToken(INTEGER, '5')
-Error in while instruction, line 8
-=
-| foo
-| bar
-=
-| foo
-| bar
+Syntax error in declaration at line 1, column 4, at token LexToken(ID, decl_wrong_token)
+Syntax error in print instruction at line 7, column 11, at token LexToken(ID, print_wrong_token)
+Syntax error in while instruction at line 11, column 10, at token LexToken(STRING, "while_wrong_token")
+DECL
+| int
+| | =
+| | | a
+| | | 5
+DECL
+| float
+| | =
+| | | b
+| | | 7
 PRINT
+| first_correct
+=
+| second_correct
 | foo
 PRINT
-| foo
+| third_correct

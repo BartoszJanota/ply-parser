@@ -1,9 +1,14 @@
-foo decl_wrong_token;
-print foo;
-foo = bar;
+foo decl_wrong_token = 6;
+int a = 5;
+float b = 7;
+
+print first_correct;
+
 print foo print_wrong_token;
-foo = bar;
-print foo;
-print foo;
+
+second_correct = foo;
+
 while (5 "while_wrong_token") 
- foo = bar; 
+  foo = bar; 
+
+print third_correct;

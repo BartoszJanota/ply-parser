@@ -55,11 +55,17 @@ class Cparser(object):
 
     def p_declarations(self, p):
         """declarations : declarations declaration"""
-        p[0] = DeclarationList(p[1].decls + [ p[2] ])
+        if p[2]:            
+            p[0] = DeclarationList(p[1].decls + [ p[2] ])
+        else: # error
+            p[0] = p[1]
     
     def p_declarations_single(self, p):
         """declarations : declaration"""
-        p[0] = DeclarationList([ p[1] ])
+        if p[1]:
+            p[0] = DeclarationList([ p[1] ])
+        else: # error
+            p[0] = DeclarationList([ ])                 
 
     def p_declaration_blank(self, p):
         """declarations : """
