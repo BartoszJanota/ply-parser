@@ -85,6 +85,12 @@ class TreePrinter:
       tprint(l+1, self.id)
       self.expr.printTree(l+1)
 
+    @addToClass(AST.ChoiceInstruction)
+    def printTree(self, l):
+      tprint(l, 'IF')
+      self.cond.printTree(l+1)
+      self.ithen.printTree(l+1)
+
     @addToClass(AST.WhileInstruction)
     def printTree(self, l):
       tprint(l, self.keyword.upper())

@@ -33,3 +33,7 @@ repeat
 	a = a + b;
 until
 	a < 1;
+
+if (a > b) 
+  print foo;
+

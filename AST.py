@@ -79,6 +79,11 @@ class Init(Node):
     self.id = id
     self.expr = expr
 
+class ChoiceInstruction(Node):
+  def __init__(self, cond, ithen):
+    self.cond = cond
+    self.ithen = ithen
+
 class WhileInstruction(Node):
   def __init__(self, kw, cond, instr):
     self.keyword = kw

@@ -147,10 +147,12 @@ class Cparser(object):
         self.handle_error('assignment', p[3])
 
     def p_choice_instr(self, p):
-        """choice_instr : IF '(' condition ')' instruction  %prec IFX
-                        | IF '(' condition ')' instruction ELSE instruction
-                        | IF '(' error ')' instruction  %prec IFX
-                        | IF '(' error ')' instruction ELSE instruction """
+        """choice_instr : IF '(' condition ')' instruction  %prec IFX"""
+        p[0] = ChoiceInstruction(p[3], p[5])
+
+                        #| IF '(' condition ')' instruction ELSE instruction
+                        #| IF '(' error ')' instruction  %prec IFX
+                        #| IF '(' error ')' instruction ELSE instruction """
 
     
     
