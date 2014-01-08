@@ -22,3 +22,8 @@ a = b + c;
 
 label_1 : a = p;
 label_2 : print "w sumie to jak wypisywac labele?";
+
+repeat
+	a = a + b;
+until
+	a < 1;

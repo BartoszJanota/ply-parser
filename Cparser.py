@@ -160,7 +160,7 @@ class Cparser(object):
 
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """
-    
+        p[0] = RepeatInstruction(p[1], p[2], p[3], p[4])
     
     def p_return_instr(self, p):
         """return_instr : RETURN expression ';' """

@@ -104,3 +104,9 @@ class LabeledInstruction(Node):
     self.keyword = kw
     self.instr = instr
 
+class RepeatInstruction(Node):
+  def __init__(self, kw_1, instrs, kw_2, cond ):
+      self.kw_1 = kw_1
+      self.kw_2 = kw_2
+      self.instrs = instrs
+      self.cond = cond
