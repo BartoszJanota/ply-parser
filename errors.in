@@ -26,3 +26,9 @@ repeat
 	a = a + b;
 until
 	foo foo;
+
+if (qux if_wrong_token) {
+  print bar;
+  print baaz;
+} 
+
