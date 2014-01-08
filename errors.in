@@ -21,3 +21,8 @@ while (fourth_correct)
 qux = foo(6 funcall_wrong_token);
 
 fifth_correct = foo(bar);
+
+repeat
+	a = a + b;
+until
+	foo foo;
