@@ -1,9 +1,10 @@
+foo decl_wrong_token;
 print foo;
-foo bar;
 foo = bar;
-print foo bar;
+print foo print_wrong_token;
 foo = bar;
 print foo;
 print foo;
-while (5 5) 
+while (5 "while_wrong_token") 
  foo = bar; 
+while (

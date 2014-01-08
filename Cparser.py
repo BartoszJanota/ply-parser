@@ -31,12 +31,16 @@ class Cparser(object):
        ("left", '*', '/', '%'),
     )
 
+    def handle_error(self, where, p):
+        print("Syntax error in %s at line %d, column %d, at token LexToken(%s, %s)" %\
+          (where, p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
 
     def p_error(self, p):
-        if p:
-            print("Syntax error at line {0}, column {1}: LexToken({2}, '{3}')".format(p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
+        if not p:
+            print 'Unexpected end of input'
         else:
-            print('At end of input')
+            # let the productions handle the error on their own
+            pass
     
     
     def p_program(self, p):
@@ -67,8 +71,9 @@ class Cparser(object):
                        
     def p_declaration_error(self, p):
         """declaration : error ';' """
-        print 'Error in declaration, line %d' % p[1].lineno
-        p[0] = DeclarationList([ ])                 
+        self.handle_error('declaration', p[1])
+        #print 'Error in declaration, line %d' % p[1].lineno
+        #p[0] = DeclarationList([ ])
 
     def p_inits(self, p):
         """inits : inits ',' init"""
@@ -120,7 +125,7 @@ class Cparser(object):
 
     def p_print_error(self, p):
         """print_instr : PRINT error ';' """
-        print 'Error in print instruction, line %d' % p[2].lineno
+        self.handle_error('print instruction', p[2])
     
     def p_labeled_instr(self, p):
         """labeled_instr : ID ':' instruction """
@@ -145,7 +150,7 @@ class Cparser(object):
 
     def p_while_error(self, p):
         """while_instr : WHILE '(' error ')' instruction """        
-        print 'Error in while instruction, line %d' % p[3].lineno
+        self.handle_error('while instruction', p[3])
 
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """
