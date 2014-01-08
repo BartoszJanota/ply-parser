@@ -94,7 +94,7 @@ class CompoundInstructions(Node):
     self.decls = decls
     self.instrs = instrs
 
-class Assingment(Node):
+class Assignment(Node):
   def __init__(self, id, expr):
     self.id = id
     self.expr = expr

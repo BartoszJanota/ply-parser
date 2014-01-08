@@ -101,7 +101,7 @@ class TreePrinter:
       self.decls.printTree(l)
       self.instrs.printTree(l)
 
-    @addToClass(AST.Assingment)
+    @addToClass(AST.Assignment)
     def printTree(self, l):
       tprint(l, '=')
       tprint(l+1, self.id)

@@ -12,3 +12,8 @@ while (5 "while_wrong_token")
   foo = bar; 
 
 print third_correct;
+
+wrong = (*);
+
+while (fourth_correct)
+  print "OK";

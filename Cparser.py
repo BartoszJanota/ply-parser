@@ -32,7 +32,7 @@ class Cparser(object):
     )
 
     def handle_error(self, where, p):
-        print("Syntax error in %s at line %d, column %d, at token LexToken(%s, %s)" %\
+        print("Syntax error in %s at line %d, column %d, at token LexToken(%s, '%s')" %\
           (where, p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
 
     def p_error(self, p):
@@ -137,9 +137,15 @@ class Cparser(object):
     
     def p_assignment(self, p):
         """assignment : ID '=' expression ';' """
-        p[0] = Assingment(p[1], p[3])
+        if p[3]:
+            p[0] = Assignment(p[1], p[3])
+        else: # error
+            pass
     
-    
+    def p_assignment_error(self, p):
+        """assignment : ID '=' error ';' """
+        self.handle_error('assignment', p[3])
+
     def p_choice_instr(self, p):
         """choice_instr : IF '(' condition ')' instruction  %prec IFX
                         | IF '(' condition ')' instruction ELSE instruction
@@ -206,7 +212,9 @@ class Cparser(object):
         "expression : '(' expression ')'"
         p[0] = p[2]
 
-    #### TODO ????                  | '(' error ')'
+    def p_expression_brackets_error(self, p):
+        "expression : '(' error ')'"
+        self.handle_error("expression (bracket)", p[2])
 
     #### TODO ??? | ID '(' error ')' """
 
