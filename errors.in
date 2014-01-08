@@ -7,4 +7,3 @@ print foo;
 print foo;
 while (5 "while_wrong_token") 
  foo = bar; 
-while (

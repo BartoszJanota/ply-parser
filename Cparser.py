@@ -72,8 +72,6 @@ class Cparser(object):
     def p_declaration_error(self, p):
         """declaration : error ';' """
         self.handle_error('declaration', p[1])
-        #print 'Error in declaration, line %d' % p[1].lineno
-        #p[0] = DeclarationList([ ])
 
     def p_inits(self, p):
         """inits : inits ',' init"""
