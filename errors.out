@@ -3,6 +3,8 @@ Syntax error in print instruction at line 7, column 11, at token LexToken(ID, 'p
 Syntax error in while instruction at line 11, column 10, at token LexToken(STRING, '"while_wrong_token"')
 Syntax error in expression (bracket) at line 16, column 10, at token LexToken(*, '*')
 Syntax error in function call at line 21, column 13, at token LexToken(ID, 'funcall_wrong_token')
+Syntax error in repeat instruction at line 28, column 6, at token LexToken(ID, 'foo')
+Syntax error in if condition at line 30, column 9, at token LexToken(ID, 'if_wrong_token')
 DECL
 | int
 | | =

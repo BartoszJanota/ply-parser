@@ -12,5 +12,21 @@ FUNDEF
 | | m
 | PRINT
 | | a
+FUNDEF
+| foo
+| RET
+| | int
+| ARG
+| | int
+| | m
+| ARG
+| | string
+| | a
+| PRINT
+| | a
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | a
 PRINT
 | a

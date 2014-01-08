@@ -92,3 +92,20 @@ UNTIL
 | <
 | | a
 | | 1
+IF
+| >
+| | a
+| | b
+| THEN
+| | PRINT
+| | | if_only
+IF
+| >
+| | b
+| | a
+| THEN
+| | PRINT
+| | | first_if
+| ELSE
+| | PRINT
+| | | then_else
