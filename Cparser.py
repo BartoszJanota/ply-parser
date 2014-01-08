@@ -96,7 +96,6 @@ class Cparser(object):
         else:
           p[0] = InstructionList([ ])
 
-    # TODO - ???
     #def p_instruction_brackets(self,p):
     #    """instruction : '{' instruction '}'"""
     #    p[0] = p[2]
@@ -119,7 +118,7 @@ class Cparser(object):
         """print_instr : PRINT expression ';' """
         p[0] = SimpleInstruction(p[1], p[2])
 
-    def p_print_instr(self, p):
+    def p_print_error(self, p):
         """print_instr : PRINT error ';' """
         print 'Error in print instruction, line %d' % p[2].lineno
     
@@ -142,9 +141,11 @@ class Cparser(object):
     
     def p_while_instr(self, p):
         """while_instr : WHILE '(' condition ')' instruction"""
-                       #| WHILE '(' error ')' instruction """
         p[0] = WhileInstruction(p[1], p[3], p[5])
 
+    def p_while_error(self, p):
+        """while_instr : WHILE '(' error ')' instruction """        
+        print 'Error in while instruction, line %d' % p[3].lineno
 
     def p_repeat_instr(self, p):
         """repeat_instr : REPEAT instructions UNTIL condition ';' """

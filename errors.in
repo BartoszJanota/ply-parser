@@ -1,0 +1,9 @@
+print foo;
+foo bar;
+foo = bar;
+print foo bar;
+foo = bar;
+print foo;
+print foo;
+while (5 5) 
+ foo = bar; 
