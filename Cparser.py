@@ -105,10 +105,6 @@ class Cparser(object):
         else:
           p[0] = InstructionList([ ])
 
-    #def p_instruction_brackets(self,p):
-    #    """instruction : '{' instruction '}'"""
-    #    p[0] = p[2]
-
     def p_instruction(self, p):
         """instruction : print_instr
                        | labeled_instr
@@ -218,7 +214,6 @@ class Cparser(object):
 
     def p_expression_fun_call(self, p):
         "expression : ID '(' expr_list_or_empty ')'"
-        print 'fun call'
         p[0] = FunctionCall(p[1], p[3])
     
     def p_expression_fun_call_error(self, p):
