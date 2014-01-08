@@ -80,9 +80,10 @@ class Init(Node):
     self.expr = expr
 
 class ChoiceInstruction(Node):
-  def __init__(self, cond, ithen):
+  def __init__(self, cond, ithen, ielse = None):
     self.cond = cond
     self.ithen = ithen
+    self.ielse = ielse
 
 class WhileInstruction(Node):
   def __init__(self, kw, cond, instr):

@@ -35,5 +35,10 @@ until
 	a < 1;
 
 if (a > b) 
-  print foo;
+  print if_only;
+
+if (b > a)
+  print first_if;
+else
+  print then_else;
 

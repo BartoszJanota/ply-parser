@@ -89,7 +89,13 @@ class TreePrinter:
     def printTree(self, l):
       tprint(l, 'IF')
       self.cond.printTree(l+1)
-      self.ithen.printTree(l+1)
+
+      tprint(l+1, 'THEN')
+      self.ithen.printTree(l+2)
+
+      if self.ielse:
+        tprint(l+1, 'ELSE')
+        self.ielse.printTree(l+2)
 
     @addToClass(AST.WhileInstruction)
     def printTree(self, l):
