@@ -2,11 +2,17 @@
 class Node(object):
   def draw(self):
     self.printTree(0)
+    
+  def accept(self, visitor):
+      className = self.__class__.__name__
+      # return visitor.visit_<className>(self)
+      meth = getattr(visitor, 'visit_' + className, None)
+      if meth!=None:
+          return meth(self)
 
 class ErrorNode(Node):
     pass
     
-
 class Const(Node):
   def __init__(self, value):
     self.value = value
@@ -19,7 +25,6 @@ class Float(Const):
 
 class String(Const):
     pass
-
 
 class Variable(Node):
   def __init__(self, id):

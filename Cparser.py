@@ -42,7 +42,6 @@ class Cparser(object):
             # let the productions handle the error on their own
             pass
     
-    
     def p_program(self, p):
         """program : ext_declarations fundefs instructions"""
         p[1].draw()  
@@ -328,7 +327,3 @@ class Cparser(object):
     def p_arg(self, p):
         """arg : TYPE ID """
         p[0] = Arg(p[1], p[2])
-
-
-    
-

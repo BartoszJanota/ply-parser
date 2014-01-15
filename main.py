@@ -4,6 +4,8 @@ import logging
 import logging.handlers
 import ply.yacc as yacc
 from Cparser import Cparser
+from TypeChecker import TypeChecker
+from AST import *
 
 
 if __name__ == '__main__':
@@ -35,4 +37,6 @@ if __name__ == '__main__':
     text = file.read()
     #parser.parse(text, lexer=Cparser.scanner, debug=logger)
     parser.parse(text, lexer=Cparser.scanner)
+    ast = parser.parse(text, lexer=Cparser.scanner)
+    #ast.accept(TypeChecker())
 
