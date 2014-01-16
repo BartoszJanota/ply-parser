@@ -22,6 +22,12 @@ class TreePrinter:
     def printTree(self, l):
       tprint(l, 'ERROR')
 
+    @addToClass(AST.Program)
+    def printTree(self,l):
+      self.ext_decls.printTree(l)
+      self.fundefs.printTree(l)
+      self.instrs.printTree(l)
+
     @addToClass(AST.BinExpr)
     def printTree(self, l):
       tprint(l, self.op)

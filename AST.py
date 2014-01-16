@@ -1,7 +1,7 @@
 
 class Node(object):
-  def draw(self):
-    self.printTree(0)
+  #def draw(self):
+  #  self.printTree(0)
     
   def accept(self, visitor):
       className = self.__class__.__name__
@@ -12,6 +12,12 @@ class Node(object):
 
 class ErrorNode(Node):
     pass
+
+class Program(Node):
+  def __init__(self, ext_decls, fundefs, instrs):
+    self.ext_decls = ext_decls
+    self.fundefs = fundefs
+    self.instrs = instrs
     
 class Const(Node):
   def __init__(self, value):

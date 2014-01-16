@@ -38,5 +38,5 @@ if __name__ == '__main__':
     #parser.parse(text, lexer=Cparser.scanner, debug=logger)
     parser.parse(text, lexer=Cparser.scanner)
     ast = parser.parse(text, lexer=Cparser.scanner)
-    #ast.accept(TypeChecker())
+    ast.accept(TypeChecker())
 
