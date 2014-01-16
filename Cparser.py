@@ -46,9 +46,6 @@ class Cparser(object):
         """program : ext_declarations fundefs instructions"""
         p[0] = Program(p[1], p[2], p[3])
         p[0].printTree(0)
-        #p[1].draw()  
-        #p[2].draw()
-        #p[3].draw() 
     
     def p_ext_declarations(self,p):
         """ext_declarations : declarations"""

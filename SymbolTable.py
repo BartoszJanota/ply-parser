@@ -1,30 +1,40 @@
 #!/usr/bin/python
 
 
-class VariableSymbol(Symbol):
+class VariableSymbol(object):
 
-    def __init__(self, name, type):
-    #
-    #
+    vs_name = ''
+    vs_type = ''
+
+    def __init__(self, vs_name, vs_type):
+        self.vs_type = vs_type
+        self.vs_name = vs_name
 
 
 class SymbolTable(object):
 
-    def __init__(self, parent, name):
-    #
-    #
+    s_table_name = ''
+    s_table_parent = ''
+    table = dict()
 
-    def put(self, name, symbol):
-    #
-    #
+    def __init__(self, parent, name):
+        self.s_table_parent = parent
+        self.s_table_name = name
+
+    def put(self, symbol):
+        if not self.table.has_key(symbol.vs_name):
+            self.table[symbol.vs_name] = symbol.vs_type
+            return True
+        return False
 
     def get(self, name):
-    #
-    #
+        return self.table[name]
+
+    def getTable(self):
+        return self.table
 
     def getParentScope(self):
-    #
-    #
+        return self.parent.getTable()
 
 
 
