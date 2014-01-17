@@ -20,7 +20,7 @@ class TypeChecker(object):
 
     def visit_Program(self, node):
         node.ext_decls.accept(self)
-        #node.fundefs.accept(self)
+        node.fundefs.accept(self)
         #node.instrs.accept(self)
 
     def visit_DeclarationList(self, node):
@@ -35,10 +35,10 @@ class TypeChecker(object):
         for init in node.inits.inits:
             v_symbol = VariableSymbol(init.id, d_type)
             if self.s_table.put(v_symbol):
-                print 'dodalem symmbol'
+                print 'dodalem symbol ' + v_symbol.vs_name + ' typu ' + d_type
                 #return True
             else:
-                print 'ten symbol juz byl zdefiniowany!'
+                print 'Symbol ' + v_symbol.vs_name + ' is already defined (as ' + self.s_table.get(v_symbol.vs_name) + ')!'
                 #return False
 
     def visit_BinExpr(self, node):
@@ -64,7 +64,12 @@ class TypeChecker(object):
     def visit_Float(self, node):
         return 'float'
          
-     
+    def visit_FunctionDefList(self, node):
+        for fundef in node.fundefs:
+          fundef.accept(self)
+
+    def visit_FunctionDef(self, node):
+        print 'FunctionDef'
 
     # ... 
     # 
