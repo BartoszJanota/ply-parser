@@ -1,0 +1,123 @@
+DECL
+| int
+| | =
+| | | a
+| | | 10
+DECL
+| float
+| | =
+| | | b
+| | | 10
+| | =
+| | | a
+| | | 8
+| | =
+| | | b
+| | | 12
+DECL
+| int
+| | =
+| | | c
+| | | 100
+DECL
+| string
+| | =
+| | | d
+| | | "qux"
+FUNDEF
+| foo
+| RET
+| | int
+| ARG
+| | int
+| | x
+| ARG
+| | float
+| | y
+| ARG
+| | string
+| | z
+| DECL
+| | int
+| | | =
+| | | | c
+| | | | 200
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | c
+| | | +
+| | | | a
+| | | | c
+| | | "bar"
+| PRINT
+| | wrong_variable
+| PRINT
+| | FUNCALL 
+| | | wrong_function
+| | | c
+| | | 5.5
+| | | "bar"
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | c
+| | | +
+| | | | a
+| | | | d
+| | | "bar"
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | +
+| | | | a
+| | | | FUNCALL 
+| | | | | foo
+| | | | | c
+| | | | | 5.5
+| PRINT
+| | FUNCALL 
+| | | outer_undefined
+| | | +
+| | | | aaa
+| | | | FUNCALL 
+| | | | | foo
+| | | | | c
+| | | | | 5.5
+| PRINT
+| | +
+| | | a
+| | | FUNCALL 
+| | | | foobar
+| | | | c
+| | | | 5.5
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | c
+| | | +
+| | | | b
+| | | | FUNCALL 
+| | | | | d
+| | | | | 5
+| | | "bar"
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | c
+| | | +
+| | | | b
+| | | | foo
+| | | "bar"
+PRINT
+| a
+Symbol a is already defined!
+Symbol b is already defined!
+Parameter #2 expects float, but expression of type int found
+Variable wrong_variable is undefined!
+Function wrong_function is undefined!
+The function foo expects 3 parameters, but 2 given!
+Function outer_undefined is undefined!
+Function foobar is undefined!
+Symbol d is a variable (expected function)!
+Symbol foo is a function (expected variable)!

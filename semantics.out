@@ -1,0 +1,58 @@
+DECL
+| int
+| | =
+| | | a
+| | | 10
+DECL
+| float
+| | =
+| | | b
+| | | 10
+| | =
+| | | bb
+| | | 8
+DECL
+| int
+| | =
+| | | c
+| | | 100
+FUNDEF
+| foo
+| RET
+| | int
+| ARG
+| | int
+| | x
+| ARG
+| | float
+| | y
+| ARG
+| | string
+| | z
+| DECL
+| | int
+| | | =
+| | | | c
+| | | | 200
+| PRINT
+| | c
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | c
+| | | 5.5
+| | | "bar"
+| PRINT
+| | FUNCALL 
+| | | foo
+| | | +
+| | | | a
+| | | | c
+| | | /
+| | | | 5.5
+| | | | c
+| | | *
+| | | | "bar"
+| | | | a
+PRINT
+| a
