@@ -54,7 +54,7 @@ class TypeChecker(object):
         # ...         
 
     def visit_Init(self, node):
-        return 'Init'
+        pass
 
     def visit_Integer(self, node):
         return 'int'
@@ -62,6 +62,9 @@ class TypeChecker(object):
     def visit_Float(self, node):
         return 'float'
          
+    def visit_String(self, node):
+        return 'string'
+
     def visit_FunctionDefList(self, node):
         for fundef in node.fundefs:
           fundef.accept(self)
@@ -72,7 +75,6 @@ class TypeChecker(object):
 
         if self.s_table.put(symbol):
             print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
-            #return True
         else:
             print 'Symbol ' + symbol.name + ' is already defined (as ' + self.s_table.get(symbol.name).name + ')!'
 
@@ -101,11 +103,16 @@ class TypeChecker(object):
                 print 'The function ' + symbol.name + ' expects ' + \
                     len(formal) + ' parameters, but ' + len(actual) + ' given!'
 
-            for param, fmlparam in zip(actual, formal):
-                print param, fmlparam
+            for actparam, fmlparam, index in zip(actual, formal, range(1, len(actual) + 1)):
+                actual_type = actparam.accept(self)
+                if actual_type != fmlparam.type:
+                    print 'Parameter #' + index + ' expects ' + actual_type + \
+                        ', but expression of type ' + fmlparam_type + ' found'
                 
         elif type(symbol) == VariableSymbol:
             print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
         else:
             print 'Symbol ' + symbol.name + ' is not defined yet!'
+
+        return symbol.rettype
 
