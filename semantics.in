@@ -5,6 +5,7 @@ int c = 100;
 int foo(int m) {
   int c = 200;
 	print fundef;
+  print foo(300);
 }
 
 print a;

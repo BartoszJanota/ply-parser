@@ -21,13 +21,12 @@ class TypeChecker(object):
     def visit_Program(self, node):
         node.ext_decls.accept(self)
         node.fundefs.accept(self)
-        #node.instrs.accept(self)
+        node.instrs.accept(self)
 
     def visit_DeclarationList(self, node):
         print 'DeclarationList'
         for decl in node.decls:
             curr_decl = decl.accept(self)
-            print curr_decl
 
     def visit_Declaration(self,node):
         d_type = node.type #.accept(self)
@@ -76,9 +75,20 @@ class TypeChecker(object):
             #return True
         else:
             print 'Symbol ' + v_symbol.name + ' is already defined (as ' + self.s_table.get(v_symbol.name).name + ')!'
-        print 'FunctionDef'
 
-    # ... 
-    # 
+        node.body.accept(self) 
 
+    def visit_CompoundInstructions(self, node):
+        node.decls.accept(self)
+        node.instrs.accept(self)
+
+    def visit_InstructionList(self, node):
+        for instr in node.instrs:
+            instr.accept(self)
+
+    def visit_SimpleInstruction(self, node):
+        node.expr.accept(self) 
+
+    def visit_FunctionCall(self, node):
+        print 'FunctionCall:', node.id
 
