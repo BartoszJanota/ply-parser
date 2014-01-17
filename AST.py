@@ -1,7 +1,11 @@
 
 class Node(object):
-  #def draw(self):
-  #  self.printTree(0)
+
+  def __init__(self, node_info):
+      #if len(node_info) == 3:
+      self.lineno = node_info['lno']
+         #self.columnno = node_info['cno']
+         #self.ptype = node_info['ptype']
     
   def accept(self, visitor):
       className = self.__class__.__name__
@@ -14,7 +18,8 @@ class ErrorNode(Node):
     pass
 
 class Program(Node):
-  def __init__(self, ext_decls, fundefs, instrs):
+  def __init__(self, node_info, ext_decls, fundefs, instrs):
+    super(Program, self).__init__(node_info)
     self.ext_decls = ext_decls
     self.fundefs = fundefs
     self.instrs = instrs
@@ -77,7 +82,8 @@ class DeclarationList(Node):
     self.decls = decls
 
 class Declaration(Node):
-  def __init__(self, type, inits):
+  def __init__(self, node_info, type, inits):
+    super(Declaration, self).__init__(node_info)
     self.type = type
     self.inits = inits
 

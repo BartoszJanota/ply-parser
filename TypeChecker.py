@@ -21,6 +21,7 @@ class TypeChecker(object):
 
 
     def visit_Program(self, node):
+        #print('Program appeared at line %s' % node.lineno)
         node.ext_decls.accept(self)
         node.fundefs.accept(self)
         node.instrs.accept(self)

@@ -31,6 +31,10 @@ class Cparser(object):
        ("left", '*', '/', '%'),
     )
 
+    def get_p_info(self, p):
+        #return dict({'lno': p.lineno, 'cno': self.scanner.find_tok_column(p), 'ptype': p.type})
+        return dict({'lno': p.lineno})
+
     def handle_error(self, where, p):
         print("Syntax error in %s at line %d, column %d, at token LexToken(%s, '%s')" %\
           (where, p.lineno, self.scanner.find_tok_column(p), p.type, p.value))
@@ -44,7 +48,7 @@ class Cparser(object):
     
     def p_program(self, p):
         """program : ext_declarations fundefs instructions"""
-        p[0] = Program(p[1], p[2], p[3])
+        p[0] = Program(self.get_p_info(p), p[1], p[2], p[3])       
         p[0].printTree(0)
     
     def p_ext_declarations(self,p):
@@ -75,7 +79,7 @@ class Cparser(object):
 
     def p_declaration(self, p):
         """declaration : TYPE inits ';' """
-        p[0] = Declaration(p[1], p[2])
+        p[0] = Declaration(self.get_p_info(p), p[1], p[2])
                        
     def p_declaration_error(self, p):
         """declaration : error ';' """
