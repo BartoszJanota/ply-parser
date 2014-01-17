@@ -1,14 +1,19 @@
 int a = 10;
-float b = 10, a = 8;
+float b = 10, a = 8, b = 12;
 int c = 100;
 string d = "qux";
 
 int foo(int x, float y, string z) {
   int c = 200;
+  print foo(c, a + c, "bar");
   print wrong_variable;
   print wrong_function(c, 5.5, "bar");
-  print foo(c, a + c, "bar");
   print foo(c, a + d, "bar");
+  print foo(a + foo(c, 5.5));
+  print outer_undefined(aaa + foo(c, 5.5));
+  print a + foobar(c, 5.5);
+  print foo(c, b + d(5), "bar");
+  print foo(c, b + foo, "bar");
 }
 
 print a;

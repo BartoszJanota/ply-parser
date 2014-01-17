@@ -37,22 +37,25 @@ class TypeChecker(object):
         inits = node.inits.accept(self)
         for init in node.inits.inits:
             symbol = VariableSymbol(d_type, init.id)
-            if self.s_table.put(symbol):
-                print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
-            else:
+            if not self.s_table.put(symbol):
                 print 'Symbol ' + symbol.name + ' is already defined!'
+            #else:
+                #print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
 
 
     def visit_BinExpr(self, node):
         type1 = node.left.accept(self)
         type2 = node.right.accept(self)
+        if type1 == 'error' or type2 == 'error':
+            return 'error'
+
         op = node.op
 
-        result_type = self.ttype.getTtype(op, type1, type2)
-        print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
-            ', the result type is ' + result_type
-
-        return result_type if result_type else 'error'
+        result_type = self.ttype.getTtypeOrError(op, type1, type2)
+        #print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
+            #', the result type is ' + result_type
+            
+        return result_type 
         
  
     def visit_RelExpr(self, node):
@@ -78,14 +81,16 @@ class TypeChecker(object):
         symbol = self.s_table.get(node.id)
 
         if type(symbol) == VariableSymbol:
-            print 'DEBUG: Captured variable symbol ' + symbol.name + ' of type ' + symbol.type
+            #print 'DEBUG: Captured variable symbol ' + symbol.name + ' of type ' + symbol.type
             return symbol.type
 
         elif type(symbol) == FunctionSymbol:
             print 'Symbol ' + symbol.name + ' is a function (expected variable)!'
+            return 'error'
 
         else: # symbol == None
             print 'Variable ' + node.id + ' is undefined!'
+            return 'error'
 
 
     def visit_FunctionDefList(self, node):
@@ -98,10 +103,10 @@ class TypeChecker(object):
         
         symbol = FunctionSymbol(node.rettype, node.name, node.fmlparams)
 
-        if self.s_table.put(symbol):
-            print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
-        else:
+        if not self.s_table.put(symbol):
             print 'Symbol ' + symbol.name + ' is already defined!'
+        #else:
+            #print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
         node.body.accept(self) 
 
@@ -124,27 +129,37 @@ class TypeChecker(object):
         symbol = self.s_table.get(node.id)
 
         if type(symbol) == FunctionSymbol:
-            print 'DEBUG: Captured function symbol ' + symbol.name + ' with return type ' + symbol.rettype
+            #print 'DEBUG: Captured function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
             actual = node.params.exprs
+            actual_types = [actparam.accept(self) for actparam in actual]
             formal = symbol.fmlparams.args
+            formal_types = [fmlparam.type for fmlparam in formal]
+
+            if 'error' in actual_types: return 'error'
+
             if len(actual) != len(formal):
                 print 'The function ' + symbol.name + ' expects ' + \
-                    len(formal) + ' parameters, but ' + len(actual) + ' given!'
+                    str(len(formal)) + ' parameters, but ' + str(len(actual)) + ' given!'
+                return 'error'
 
-            for actparam, fmlparam, index in zip(actual, formal, range(1, len(actual) + 1)):
-                actual_type = actparam.accept(self)
-                if actual_type != fmlparam.type:
-                    print 'Parameter #' + str(index) + ' expects ' + fmlparam.type + \
+            for actual_type, formal_type, index in zip(actual_types, formal_types, range(1, len(actual) + 1)):
+                if actual_type != formal_type:
+                    print 'Parameter #' + str(index) + ' expects ' + formal_type + \
                         ', but expression of type ' + actual_type + ' found'
+                    return 'error'
 
             return symbol.rettype
                 
         elif type(symbol) == VariableSymbol:
-            print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
 
-        else:
+            print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
+            return 'error'
+
+        else: # symbol == None
+
             print 'Function ' + node.id + ' is undefined!'
+            return 'error'
 
 
 

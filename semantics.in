@@ -1,12 +1,12 @@
 int a = 10;
-float b = 10, a = 8;
+float b = 10, bb = 8;
 int c = 100;
 
 int foo(int x, float y, string z) {
   int c = 200;
 	print c;
   print foo(c, 5.5, "bar");
-  print a + b;
+  print foo(a + c, 5.5 / c, "bar" * a);
 }
 
 print a;
