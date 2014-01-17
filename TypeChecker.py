@@ -94,6 +94,16 @@ class TypeChecker(object):
 
         if type(symbol) == FunctionSymbol:
             print 'DEBUG: Captured function symbol ' + symbol.name + ' with return type ' + symbol.rettype
+
+            actual = node.params.exprs
+            formal = symbol.fmlparams.args
+            if len(actual) != len(formal):
+                print 'The function ' + symbol.name + ' expects ' + \
+                    len(formal) + ' parameters, but ' + len(actual) + ' given!'
+
+            for param, fmlparam in zip(actual, formal):
+                print param, fmlparam
+                
         elif type(symbol) == VariableSymbol:
             print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
         else:

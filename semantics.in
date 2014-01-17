@@ -2,10 +2,10 @@ int a = 10;
 float b = 10, a = 8;
 int c = 100;
 
-int foo(int m) {
+int foo(int x, float y, string z) {
   int c = 200;
 	print fundef;
-  print foo(300);
+  print foo(300, 5.5, "bar");
 }
 
 print a;
