@@ -33,12 +33,12 @@ class TypeChecker(object):
         d_type = node.type #.accept(self)
         inits = node.inits.accept(self)
         for init in node.inits.inits:
-            v_symbol = VariableSymbol(d_type, init.id)
-            if self.s_table.put(v_symbol):
-                print 'dodalem symbol ' + v_symbol.name + ' typu ' + d_type
+            symbol = VariableSymbol(d_type, init.id)
+            if self.s_table.put(symbol):
+                print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
                 #return True
             else:
-                print 'Symbol ' + v_symbol.name + ' is already defined (as ' + self.s_table.get(v_symbol.name).name + ')!'
+                print 'Symbol ' + symbol.name + ' is already defined (as ' + self.s_table.get(symbol.name).type + ')!'
                 #return False
 
     def visit_BinExpr(self, node):
@@ -68,6 +68,14 @@ class TypeChecker(object):
           fundef.accept(self)
 
     def visit_FunctionDef(self, node):
+        
+        symbol = FunctionSymbol(node.rettype, node.name, node.fmlparams)
+
+        if self.s_table.put(symbol):
+            print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
+            #return True
+        else:
+            print 'Symbol ' + v_symbol.name + ' is already defined (as ' + self.s_table.get(v_symbol.name).name + ')!'
         print 'FunctionDef'
 
     # ... 
