@@ -29,16 +29,14 @@ class TypeChecker(object):
             curr_decl = decl.accept(self)
 
     def visit_Declaration(self,node):
-        d_type = node.type #.accept(self)
+        d_type = node.type 
         inits = node.inits.accept(self)
         for init in node.inits.inits:
             symbol = VariableSymbol(d_type, init.id)
             if self.s_table.put(symbol):
                 print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
-                #return True
             else:
-                print 'Symbol ' + symbol.name + ' is already defined (as ' + self.s_table.get(symbol.name).type + ')!'
-                #return False
+                print 'Symbol ' + symbol.name + ' is already defined!'
 
     def visit_BinExpr(self, node):
         type1 = node.left.accept(self)
@@ -52,9 +50,6 @@ class TypeChecker(object):
         type1 = node.left.accept(self);
         type2 = node.right.accept(self);
         # ...         
-
-    def visit_Init(self, node):
-        pass
 
     def visit_Integer(self, node):
         return 'int'
@@ -76,7 +71,7 @@ class TypeChecker(object):
         if self.s_table.put(symbol):
             print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
         else:
-            print 'Symbol ' + symbol.name + ' is already defined (as ' + self.s_table.get(symbol.name).name + ')!'
+            print 'Symbol ' + symbol.name + ' is already defined!'
 
         node.body.accept(self) 
 
