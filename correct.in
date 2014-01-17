@@ -7,4 +7,38 @@ int foo(int m){
 
 
 print foo(5.12);
+print bar(3 + 8, "abc");
+
+print baz(3 != 5, "abc" * how_many, Whatchamacallit);
+
+print qux(hello);
+
+while ( a > 1 ) 
+	print baba(2);
+
+while ( c >= 1 ) {
+	print "compound instructions";
+  continue;
+	break;
+}
+	
+return b(a);
+
+a = b + c;
+
+label_1 : a = p;
+label_2 : print "w sumie to jak wypisywac labele?";
+
+repeat
+	a = a + b;
+until
+	a < 1;
+
+if (a > b) 
+  print if_only;
+
+if (b > a)
+  print first_if;
+else
+  print then_else;
 

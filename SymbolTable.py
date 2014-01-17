@@ -22,7 +22,7 @@ class SymbolTable(object):
         self.s_table_name = name
 
     def put(self, symbol):
-        if not self.table.has_key(symbol.vs_name):
+        if not symbol.vs_name in self.table:
             self.table[symbol.vs_name] = symbol.vs_type
             return True
         return False
@@ -34,7 +34,8 @@ class SymbolTable(object):
         return self.table
 
     def getParentScope(self):
-        return self.parent.getTable()
+        if self.parent is not None:
+            return self.parent.getTable()
 
 
 

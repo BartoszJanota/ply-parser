@@ -8,14 +8,26 @@ class TypeChecker(object):
     ttype = Ttype()
     s_table = SymbolTable('general', None)
 
+    #sprawdza operatory: =, ==, !=, <, >
+    #do skonczenia, raczej to dobry pomysl, zeby tu sprawdzac, bo w Ttype bedzie inaczje mln wierszy
+    #def check_operands(self, symbol1, symbol1, operator):
+    #    if symbol1.vs_type == symbol2.vs_type:
+    #        return True
+    #    elif (symbol1.vs_type == 'float' && symbol2.vs_type == 'int' && operator == '='):
+    #        return True
+    #    elif 
+
+
     def visit_Program(self, node):
-        print 'program'
         node.ext_decls.accept(self)
+        #node.fundefs.accept(self)
+        #node.instrs.accept(self)
 
     def visit_DeclarationList(self, node):
         print 'DeclarationList'
         for decl in node.decls:
-            decl.accept(self)
+            curr_decl = decl.accept(self)
+            print curr_decl
 
     def visit_Declaration(self,node):
         d_type = node.type#.accept(self)
@@ -24,8 +36,10 @@ class TypeChecker(object):
             v_symbol = VariableSymbol(init.id, d_type)
             if self.s_table.put(v_symbol):
                 print 'dodalem symmbol'
+                #return True
             else:
                 print 'ten symbol juz byl zdefiniowany!'
+                #return False
 
     def visit_BinExpr(self, node):
         type1 = node.left.accept(self)
