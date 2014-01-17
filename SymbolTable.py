@@ -32,13 +32,17 @@ class SymbolTable(object):
         return False
 
     def get(self, name):
-        return self.table.get(name)
+        symbol = self.table.get(name)
+        if symbol is not None:
+            return symbol
+        elif self.getParent() is not None:
+            return self.getParent().get(name)
+        return symbol
 
     def getTable(self):
         return self.table
 
-    def getParentScope(self):
-        if self.parent is not None:
-            return self.parent.getTable()
+    def getParent(self):
+        return self.s_table_parent
 
 

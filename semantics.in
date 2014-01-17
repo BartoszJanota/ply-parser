@@ -4,7 +4,11 @@ int c = 100;
 
 int foo(int x, float y, string z) {
   int c = 200;
-	print c;
+  int f(int a){
+  	int c;
+  	print b;
+  }
+  print c;
   print foo(c, 5.5, "bar");
   print foo(a + c, 5.5 / c, "bar" * a);
 }

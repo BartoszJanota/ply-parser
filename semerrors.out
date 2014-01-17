@@ -42,6 +42,40 @@ FUNDEF
 | | | =
 | | | | c
 | | | | 200
+| DECL
+| | int
+| | | =
+| | | | c
+| | | | 100
+| DECL
+| | int
+| | | =
+| | | | b
+| | | | 5
+| FUNDEF
+| | f
+| | RET
+| | | int
+| | ARG
+| | | int
+| | | a
+| | DECL
+| | | int
+| | | | =
+| | | | | b
+| | | | | 1
+| | DECL
+| | | int
+| | | | =
+| | | | | e
+| | | | | 4
+| | DECL
+| | | int
+| | | | =
+| | | | | e
+| | | | | 200
+| | PRINT
+| | | c
 | PRINT
 | | FUNCALL 
 | | | foo
@@ -113,6 +147,8 @@ PRINT
 | a
 Symbol a is already defined!
 Symbol b is already defined!
+Symbol c is already defined!
+Symbol e is already defined!
 Parameter #2 expects float, but expression of type int found
 Variable wrong_variable is undefined!
 Function wrong_function is undefined!

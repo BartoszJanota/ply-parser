@@ -8,7 +8,7 @@ class TypeChecker(object):
 
     def __init__(self):
         self.ttype = Ttype()
-        self.s_table = SymbolTable('general', None)
+        #self.s_table = SymbolTable('general', None)
 
     #sprawdza operatory: =, ==, !=, <, >
     #do skonczenia, raczej to dobry pomysl, zeby tu sprawdzac, bo w Ttype bedzie inaczje mln wierszy
@@ -20,33 +20,35 @@ class TypeChecker(object):
     #    elif 
 
 
-    def visit_Program(self, node):
+    def visit_Program(self, node, table):
         #print('Program appeared at line %s' % node.lineno)
-        node.ext_decls.accept(self)
-        node.fundefs.accept(self)
-        node.instrs.accept(self)
+        #table = self.s_table
+        table = SymbolTable(None, 'general')
+        node.ext_decls.accept(self, table)
+        node.fundefs.accept(self, table)
+        node.instrs.accept(self, table)
 
 
-    def visit_DeclarationList(self, node):
+    def visit_DeclarationList(self, node, table):
         for decl in node.decls:
-            curr_decl = decl.accept(self)
+            curr_decl = decl.accept(self, table)
 
 
-    def visit_Declaration(self,node):
+    def visit_Declaration(self, node, table):
 
         d_type = node.type 
-        inits = node.inits.accept(self)
+        inits = node.inits.accept(self, table)
         for init in node.inits.inits:
             symbol = VariableSymbol(d_type, init.id)
-            if not self.s_table.put(symbol):
+            if not table.put(symbol):
                 print 'Symbol ' + symbol.name + ' is already defined!'
             #else:
                 #print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
 
 
-    def visit_BinExpr(self, node):
-        type1 = node.left.accept(self)
-        type2 = node.right.accept(self)
+    def visit_BinExpr(self, node, table):
+        type1 = node.left.accept(self, table)
+        type2 = node.right.accept(self, table)
         if type1 == 'error' or type2 == 'error':
             return 'error'
 
@@ -59,27 +61,27 @@ class TypeChecker(object):
         return result_type 
         
  
-    def visit_RelExpr(self, node):
-        type1 = node.left.accept(self);
-        type2 = node.right.accept(self);
+    def visit_RelExpr(self, node, table):
+        type1 = node.left.accept(self, table);
+        type2 = node.right.accept(self, table);
         # ...         
 
 
-    def visit_Integer(self, node):
+    def visit_Integer(self, node, table):
         return 'int'
 
 
-    def visit_Float(self, node):
+    def visit_Float(self, node, table):
         return 'float'
 
 
-    def visit_String(self, node):
+    def visit_String(self, node, table):
         return 'string'
 
 
-    def visit_Variable(self, node):
+    def visit_Variable(self, node, table):
         
-        symbol = self.s_table.get(node.id)
+        symbol = table.get(node.id)
 
         if type(symbol) == VariableSymbol:
             #print 'DEBUG: Captured variable symbol ' + symbol.name + ' of type ' + symbol.type
@@ -94,46 +96,46 @@ class TypeChecker(object):
             return 'error'
 
 
-    def visit_FunctionDefList(self, node):
+    def visit_FunctionDefList(self, node, table):
     
         for fundef in node.fundefs:
-          fundef.accept(self)
+          fundef.accept(self, table)
 
 
-    def visit_FunctionDef(self, node):
+    def visit_FunctionDef(self, node, table):
         
         symbol = FunctionSymbol(node.rettype, node.name, node.fmlparams)
 
-        if not self.s_table.put(symbol):
+        if not table.put(symbol):
             print 'Symbol ' + symbol.name + ' is already defined!'
         #else:
             #print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
-        node.body.accept(self) 
+        node.body.accept(self, SymbolTable(table, 'node.name')) 
 
 
-    def visit_CompoundInstructions(self, node):
-        node.decls.accept(self)
-        node.instrs.accept(self)
+    def visit_CompoundInstructions(self, node, table):
+        node.decls.accept(self, table)
+        node.instrs.accept(self, table)
 
 
-    def visit_InstructionList(self, node):
+    def visit_InstructionList(self, node, table):
         for instr in node.instrs:
-            instr.accept(self)
+            instr.accept(self, table)
 
 
-    def visit_SimpleInstruction(self, node):
-        node.expr.accept(self) 
+    def visit_SimpleInstruction(self, node, table):
+        node.expr.accept(self, table) 
 
 
-    def visit_FunctionCall(self, node):        
-        symbol = self.s_table.get(node.id)
+    def visit_FunctionCall(self, node, table):        
+        symbol = table.get(node.id)
 
         if type(symbol) == FunctionSymbol:
             #print 'DEBUG: Captured function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
             actual = node.params.exprs
-            actual_types = [actparam.accept(self) for actparam in actual]
+            actual_types = [actparam.accept(self, table) for actparam in actual]
             formal = symbol.fmlparams.args
             formal_types = [fmlparam.type for fmlparam in formal]
 

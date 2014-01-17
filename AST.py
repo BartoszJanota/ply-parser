@@ -7,12 +7,12 @@ class Node(object):
          #self.columnno = node_info['cno']
          #self.ptype = node_info['ptype']
     
-  def accept(self, visitor):
+  def accept(self, visitor, table = None):
       className = self.__class__.__name__
       # return visitor.visit_<className>(self)
       meth = getattr(visitor, 'visit_' + className, None)
       if meth!=None:
-          return meth(self)
+          return meth(self, table)
 
 class ErrorNode(Node):
     pass

@@ -5,6 +5,15 @@ string d = "qux";
 
 int foo(int x, float y, string z) {
   int c = 200;
+  int c = 100;
+  int b = 5;
+  int f(int a){
+    int b = 1;
+    int e = 4;
+    int e = 200;
+    print c; 
+    /*bez print a; wywala sie parser!!!*/
+  }
   print foo(c, a + c, "bar");
   print wrong_variable;
   print wrong_function(c, 5.5, "bar");

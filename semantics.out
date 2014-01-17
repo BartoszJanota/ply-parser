@@ -1,3 +1,4 @@
+Syntax error in declaration at line 8, column 9, at token LexToken(;, ';')
 DECL
 | int
 | | =
@@ -34,6 +35,15 @@ FUNDEF
 | | | =
 | | | | c
 | | | | 200
+| FUNDEF
+| | f
+| | RET
+| | | int
+| | ARG
+| | | int
+| | | a
+| | PRINT
+| | | b
 | PRINT
 | | c
 | PRINT
