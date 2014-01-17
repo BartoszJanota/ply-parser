@@ -138,7 +138,7 @@ class Cparser(object):
         p[0] = LabeledInstruction(p[1], p[3])
     
     def p_assignment(self, p):
-        """assignment : ID '=' expression ';' """
+        """assignment : expression '=' expression ';' """
         if p[3]:
             p[0] = Assignment(p[1], p[3])
         else: # error

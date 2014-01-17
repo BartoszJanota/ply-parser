@@ -118,9 +118,9 @@ class CompoundInstructions(Node):
     self.instrs = instrs
 
 class Assignment(Node):
-  def __init__(self, id, expr):
-    self.id = id
-    self.expr = expr
+  def __init__(self, expr1, expr2):
+    self.expr1 = expr1
+    self.expr2 = expr2
 
 class LabeledInstruction(Node):
   def __init__(self, kw, instr):

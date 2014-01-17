@@ -121,8 +121,8 @@ class TreePrinter:
     @addToClass(AST.Assignment)
     def printTree(self, l):
       tprint(l, '=')
-      tprint(l+1, self.id)
-      self.expr.printTree(l+1)
+      self.expr1.printTree(l+1)
+      self.expr2.printTree(l+1)
 
     @addToClass(AST.LabeledInstruction)
     def printTree(self, l):
