@@ -6,6 +6,7 @@ int foo(int x, float y, string z) {
   int c = 200;
 	print c;
   print foo(c, 5.5, "bar");
+  print a + b;
 }
 
 print a;

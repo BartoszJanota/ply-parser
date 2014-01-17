@@ -5,8 +5,10 @@ from SymbolTable import *
 
 class TypeChecker(object):
 
-    ttype = Ttype()
-    s_table = SymbolTable('general', None)
+
+    def __init__(self):
+        self.ttype = Ttype()
+        self.s_table = SymbolTable('general', None)
 
     #sprawdza operatory: =, ==, !=, <, >
     #do skonczenia, raczej to dobry pomysl, zeby tu sprawdzac, bo w Ttype bedzie inaczje mln wierszy
@@ -44,9 +46,13 @@ class TypeChecker(object):
     def visit_BinExpr(self, node):
         type1 = node.left.accept(self)
         type2 = node.right.accept(self)
-        op    = node.op
-        if not (ttype.getType(op, type1, type2)):
-            print 'error in BinExpr'
+        op = node.op
+
+        result_type = self.ttype.getTtype(op, type1, type2)
+        print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
+            ', the result type is ' + result_type
+
+        return result_type if result_type else 'error'
         
  
     def visit_RelExpr(self, node):
@@ -129,8 +135,8 @@ class TypeChecker(object):
             for actparam, fmlparam, index in zip(actual, formal, range(1, len(actual) + 1)):
                 actual_type = actparam.accept(self)
                 if actual_type != fmlparam.type:
-                    print 'Parameter #' + index + ' expects ' + actual_type + \
-                        ', but expression of type ' + fmlparam_type + ' found'
+                    print 'Parameter #' + str(index) + ' expects ' + fmlparam.type + \
+                        ', but expression of type ' + actual_type + ' found'
 
             return symbol.rettype
                 

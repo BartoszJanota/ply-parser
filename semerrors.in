@@ -1,11 +1,14 @@
 int a = 10;
 float b = 10, a = 8;
 int c = 100;
+string d = "qux";
 
 int foo(int x, float y, string z) {
   int c = 200;
   print wrong_variable;
   print wrong_function(c, 5.5, "bar");
+  print foo(c, a + c, "bar");
+  print foo(c, a + d, "bar");
 }
 
 print a;
