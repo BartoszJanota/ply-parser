@@ -60,6 +60,20 @@ class TypeChecker(object):
     def visit_String(self, node):
         return 'string'
 
+    def visit_Variable(self, node):
+        
+        symbol = self.s_table.get(node.id)
+
+        if type(symbol) == VariableSymbol:
+            print 'DEBUG: Captured variable symbol ' + symbol.name + ' of type ' + symbol.type
+            return symbol.type
+
+        elif type(symbol) == FunctionSymbol:
+            print 'Symbol ' + symbol.name + ' is a function (expected variable)!'
+
+        else:
+            print 'Symbol ' + symbol.name + ' is undefined!'
+
     def visit_FunctionDefList(self, node):
         for fundef in node.fundefs:
           fundef.accept(self)
@@ -107,7 +121,7 @@ class TypeChecker(object):
         elif type(symbol) == VariableSymbol:
             print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
         else:
-            print 'Symbol ' + symbol.name + ' is not defined yet!'
+            print 'Symbol ' + symbol.name + ' is undefined!'
 
         return symbol.rettype
 
