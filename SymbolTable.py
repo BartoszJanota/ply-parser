@@ -32,7 +32,7 @@ class SymbolTable(object):
         return False
 
     def get(self, name):
-        return self.table[name]
+        return self.table.get(name)
 
     def getTable(self):
         return self.table

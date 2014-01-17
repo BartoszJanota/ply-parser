@@ -23,12 +23,14 @@ class TypeChecker(object):
         node.fundefs.accept(self)
         node.instrs.accept(self)
 
+
     def visit_DeclarationList(self, node):
-        print 'DeclarationList'
         for decl in node.decls:
             curr_decl = decl.accept(self)
 
+
     def visit_Declaration(self,node):
+
         d_type = node.type 
         inits = node.inits.accept(self)
         for init in node.inits.inits:
@@ -37,6 +39,7 @@ class TypeChecker(object):
                 print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
             else:
                 print 'Symbol ' + symbol.name + ' is already defined!'
+
 
     def visit_BinExpr(self, node):
         type1 = node.left.accept(self)
@@ -51,14 +54,18 @@ class TypeChecker(object):
         type2 = node.right.accept(self);
         # ...         
 
+
     def visit_Integer(self, node):
         return 'int'
 
+
     def visit_Float(self, node):
         return 'float'
-         
+
+
     def visit_String(self, node):
         return 'string'
+
 
     def visit_Variable(self, node):
         
@@ -71,12 +78,15 @@ class TypeChecker(object):
         elif type(symbol) == FunctionSymbol:
             print 'Symbol ' + symbol.name + ' is a function (expected variable)!'
 
-        else:
-            print 'Symbol ' + symbol.name + ' is undefined!'
+        else: # symbol == None
+            print 'Variable ' + node.id + ' is undefined!'
+
 
     def visit_FunctionDefList(self, node):
+    
         for fundef in node.fundefs:
           fundef.accept(self)
+
 
     def visit_FunctionDef(self, node):
         
@@ -89,16 +99,20 @@ class TypeChecker(object):
 
         node.body.accept(self) 
 
+
     def visit_CompoundInstructions(self, node):
         node.decls.accept(self)
         node.instrs.accept(self)
+
 
     def visit_InstructionList(self, node):
         for instr in node.instrs:
             instr.accept(self)
 
+
     def visit_SimpleInstruction(self, node):
         node.expr.accept(self) 
+
 
     def visit_FunctionCall(self, node):        
         symbol = self.s_table.get(node.id)
@@ -117,11 +131,15 @@ class TypeChecker(object):
                 if actual_type != fmlparam.type:
                     print 'Parameter #' + index + ' expects ' + actual_type + \
                         ', but expression of type ' + fmlparam_type + ' found'
+
+            return symbol.rettype
                 
         elif type(symbol) == VariableSymbol:
             print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
-        else:
-            print 'Symbol ' + symbol.name + ' is undefined!'
 
-        return symbol.rettype
+        else:
+            print 'Function ' + node.id + ' is undefined!'
+
+
+
 
