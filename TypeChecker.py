@@ -30,15 +30,15 @@ class TypeChecker(object):
             print curr_decl
 
     def visit_Declaration(self,node):
-        d_type = node.type#.accept(self)
+        d_type = node.type #.accept(self)
         inits = node.inits.accept(self)
         for init in node.inits.inits:
-            v_symbol = VariableSymbol(init.id, d_type)
+            v_symbol = VariableSymbol(d_type, init.id)
             if self.s_table.put(v_symbol):
-                print 'dodalem symbol ' + v_symbol.vs_name + ' typu ' + d_type
+                print 'dodalem symbol ' + v_symbol.name + ' typu ' + d_type
                 #return True
             else:
-                print 'Symbol ' + v_symbol.vs_name + ' is already defined (as ' + self.s_table.get(v_symbol.vs_name) + ')!'
+                print 'Symbol ' + v_symbol.name + ' is already defined (as ' + self.s_table.get(v_symbol.name).name + ')!'
                 #return False
 
     def visit_BinExpr(self, node):
@@ -52,8 +52,7 @@ class TypeChecker(object):
     def visit_RelExpr(self, node):
         type1 = node.left.accept(self);
         type2 = node.right.accept(self);
-        # ... 
-        #
+        # ...         
 
     def visit_Init(self, node):
         return 'Init'

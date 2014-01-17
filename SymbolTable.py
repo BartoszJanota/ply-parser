@@ -1,29 +1,33 @@
 #!/usr/bin/python
 
+class Symbol(object):
 
-class VariableSymbol(object):
+    def __init__(self, name):
+        self.name = name
 
-    vs_name = ''
-    vs_type = ''
+class VariableSymbol(Symbol):
 
-    def __init__(self, vs_name, vs_type):
-        self.vs_type = vs_type
-        self.vs_name = vs_name
+    def __init__(self, type, name):
+        super(VariableSymbol, self).__init__(name)
+        self.type = type
 
+class FunctionSymbol(Symbol):
+
+    def __init__(self, rettype, name, fmlparams):
+        super(FunctionSymbol, self).__init__(name)
+        self.rettype = rettype
+        self.fmlparams = fmlparams
 
 class SymbolTable(object):
-
-    s_table_name = ''
-    s_table_parent = ''
-    table = dict()
 
     def __init__(self, parent, name):
         self.s_table_parent = parent
         self.s_table_name = name
+        self.table = dict()
 
     def put(self, symbol):
-        if not symbol.vs_name in self.table:
-            self.table[symbol.vs_name] = symbol.vs_type
+        if not symbol.name in self.table:
+            self.table[symbol.name] = symbol
             return True
         return False
 
@@ -36,8 +40,5 @@ class SymbolTable(object):
     def getParentScope(self):
         if self.parent is not None:
             return self.parent.getTable()
-
-
-
 
 
