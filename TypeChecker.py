@@ -74,7 +74,7 @@ class TypeChecker(object):
             print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
             #return True
         else:
-            print 'Symbol ' + v_symbol.name + ' is already defined (as ' + self.s_table.get(v_symbol.name).name + ')!'
+            print 'Symbol ' + symbol.name + ' is already defined (as ' + self.s_table.get(symbol.name).name + ')!'
 
         node.body.accept(self) 
 
@@ -89,6 +89,13 @@ class TypeChecker(object):
     def visit_SimpleInstruction(self, node):
         node.expr.accept(self) 
 
-    def visit_FunctionCall(self, node):
-        print 'FunctionCall:', node.id
+    def visit_FunctionCall(self, node):        
+        symbol = self.s_table.get(node.id)
+
+        if type(symbol) == FunctionSymbol:
+            print 'DEBUG: Captured function symbol ' + symbol.name + ' with return type ' + symbol.rettype
+        elif type(symbol) == VariableSymbol:
+            print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
+        else:
+            print 'Symbol ' + symbol.name + ' is not defined yet!'
 

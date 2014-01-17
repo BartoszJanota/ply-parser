@@ -9,3 +9,4 @@ int foo(int m) {
 }
 
 print a;
+
