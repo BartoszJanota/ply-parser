@@ -54,9 +54,10 @@ class ExprList(Node):
     self.exprs = exprs
 
 class FunctionCall(Node):
-  def __init__(self, id, params):
+  def __init__(self, id, params, pos):
     self.id = id
     self.params = params
+    self.pos = pos
 
 class FunctionDefList(Node):
   def __init__(self, fundefs):

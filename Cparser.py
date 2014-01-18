@@ -233,7 +233,7 @@ class Cparser(object):
 
     def p_expression_fun_call(self, p):
         "expression : ID '(' expr_list_or_empty ')'"
-        p[0] = FunctionCall(p[1], p[3])
+        p[0] = FunctionCall(p[1], p[3], pos(p))
     
     def p_expression_fun_call_error(self, p):
         "expression : ID '(' error ')'"

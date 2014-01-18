@@ -156,26 +156,26 @@ class TypeChecker(object):
             if 'error' in actual_types: return 'error'
 
             if len(actual) != len(formal):
-                print 'The function ' + symbol.name + ' expects ' + \
-                    str(len(formal)) + ' parameters, but ' + str(len(actual)) + ' given!'
+                self.handle_error(node.pos, 'The function ' + symbol.name + ' expects ' + \
+                    str(len(formal)) + ' parameters, but ' + str(len(actual)) + ' given')
                 return 'error'
 
             for actual_type, formal_type, index in zip(actual_types, formal_types, range(1, len(actual) + 1)):
                 if actual_type != formal_type:
-                    print 'Parameter #' + str(index) + ' expects ' + formal_type + \
-                        ', but expression of type ' + actual_type + ' found!'
+                    self.handle_error(node.pos, 'Parameter #' + str(index) + ' expects ' + formal_type + \
+                        ', but expression of type ' + actual_type + ' found')
                     return 'error'
 
             return symbol.rettype
                 
         elif type(symbol) == VariableSymbol:
 
-            print 'Symbol ' + symbol.name + ' is a variable (expected function)!'
+            self.handle_error(node.pos, 'Symbol ' + symbol.name + ' is a variable (expected function)')
             return 'error'
 
         else: # symbol == None
 
-            print 'Function ' + node.id + ' is undefined!'
+            self.handle_error(node.pos, 'Function ' + node.id + ' is undefined')
             return 'error'
 
     def visit_Assignment(self, node, table):
