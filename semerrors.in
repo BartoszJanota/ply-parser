@@ -34,4 +34,4 @@ int foo(int x, float y, string z, string x) {
 print a;
 a = g;
 a = b + 1;
-
+return 555;

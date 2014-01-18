@@ -140,7 +140,7 @@ class TypeChecker(object):
                         expected_rettype + ', given ' + rettype)
 
         else: # global scope
-          print 'Return statement used outside a function!'
+            self.handle_error(node.pos, 'Return statement used outside a function')
 
     def visit_FunctionCall(self, node, table):        
         symbol = table.get(node.id)
