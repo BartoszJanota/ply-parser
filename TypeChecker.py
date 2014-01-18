@@ -160,13 +160,15 @@ class TypeChecker(object):
         oper2_type = node.expr2.accept(self, table)
         if oper1_type == 'error' or oper2_type == 'error':
             return 'error'
-        if not self.check_assingment(oper1_type, oper2_type):
-            print 'Cannot assign ' + str(oper2_type) + ' operand to ' + str(oper1_type) + ' operand.'
+        if not self.check_assignment(oper1_type, oper2_type):
+            art1 = 'a' if str(oper1_type) == 'int' else 'an'
+            art2 = 'a' if str(oper2_type) == 'int' else 'an'
+            print 'Cannot assign ' + art1 + ' ' + str(oper2_type) + ' operand to ' + art2 + ' ' + str(oper1_type) + ' operand.'
         return True    
         #print 'DEBUG: Captured assingment ' + str(node.expr1) + ' = ' + str(node.expr2)
 
 
-    def check_assingment(self, oper1_type, oper2_type):
+    def check_assignment(self, oper1_type, oper2_type):
         if oper1_type == oper2_type:
             return True
         elif oper1_type == 'float' and oper2_type == 'int':
