@@ -9,8 +9,12 @@ class TypeChecker(object):
     def __init__(self):
         self.ttype = Ttype()
 
+
+    def handle_error(self, pos, msg):
+        print 'Line ' + str(pos.line) + ': ' + msg
+
+
     def visit_Program(self, node, table):
-        #print('Program appeared at line %s' % node.lineno)
         table = SymbolTable(None, None)
         node.ext_decls.accept(self, table)
         node.fundefs.accept(self, table)
@@ -132,8 +136,8 @@ class TypeChecker(object):
             if rettype != 'error':
                 expected_rettype = table.function.rettype
                 if rettype != expected_rettype:
-                    print 'Wrong return expression type, expected ' + expected_rettype + \
-                        ', given ' + rettype + ' (line ' + str(node.pos.line) + ')!'
+                    self.handle_error(node.pos, 'Wrong return expression type, expected ' +\
+                        expected_rettype + ', given ' + rettype)
 
         else: # global scope
           print 'Return statement used outside a function!'
