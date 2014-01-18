@@ -99,7 +99,15 @@ class TypeChecker(object):
         #else:
             #print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
-        node.body.accept(self, SymbolTable(table, symbol))
+        subtable = SymbolTable(table, symbol)
+        for fmlparam in node.fmlparams.args:
+            type = fmlparam.type
+            id = fmlparam.id
+            symbol = VariableSymbol(type, id)
+            if not subtable.put(symbol):
+                print 'Parameter ' + id + ' already declared!'
+
+        node.body.accept(self, subtable)
 
 
     def visit_CompoundInstructions(self, node, table):

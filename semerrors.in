@@ -3,7 +3,7 @@ float b = 10, a = 8, b = 12;
 int c = 100;
 string d = "qux";
 
-int foo(int x, float y, string z) {
+int foo(int x, float y, string z, string x) {
   int c = 200;
   int c = 100;
   int b = 5;
@@ -23,6 +23,7 @@ int foo(int x, float y, string z) {
   print foo(c, b + d(5), "bar");
   print foo(c, b + foo, "bar");
   return d + d;
+  return z + z;
   return 5.5;
 }
 
