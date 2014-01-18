@@ -10,16 +10,6 @@ class TypeChecker(object):
         self.ttype = Ttype()
         #self.s_table = SymbolTable('general', None)
 
-    #sprawdza operatory: =, ==, !=, <, >
-    #do skonczenia, raczej to dobry pomysl, zeby tu sprawdzac, bo w Ttype bedzie inaczje mln wierszy
-    #def check_operands(self, symbol1, symbol1, operator):
-    #    if symbol1.vs_type == symbol2.vs_type:
-    #        return True
-    #    elif (symbol1.vs_type == 'float' && symbol2.vs_type == 'int' && operator == '='):
-    #        return True
-    #    elif 
-
-
     def visit_Program(self, node, table):
         #print('Program appeared at line %s' % node.lineno)
         #table = self.s_table
@@ -56,7 +46,7 @@ class TypeChecker(object):
 
         result_type = self.ttype.getTtypeOrError(op, type1, type2)
         #print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
-            #', the result type is ' + result_type
+        #    ', the result type is ' + result_type
             
         return result_type 
         
@@ -122,6 +112,7 @@ class TypeChecker(object):
     def visit_InstructionList(self, node, table):
         for instr in node.instrs:
             instr.accept(self, table)
+            #print "DEBUG: Captured simple instr " +  str(instr)
 
 
     def visit_SimpleInstruction(self, node, table):
@@ -163,6 +154,34 @@ class TypeChecker(object):
 
             print 'Function ' + node.id + ' is undefined!'
             return 'error'
+
+    def visit_Assignment(self, node, table):
+        oper1_type = node.expr1.accept(self, table)
+        oper2_type = node.expr2.accept(self, table)
+        if oper1_type == 'error' or oper2_type == 'error':
+            return 'error'
+        if not self.check_assingment(oper1_type, oper2_type):
+            print 'Cannot assign ' + str(oper2_type) + ' operand to ' + str(oper1_type) + ' operand.'
+        return True    
+        #print 'DEBUG: Captured assingment ' + str(node.expr1) + ' = ' + str(node.expr2)
+
+
+    def check_assingment(self, oper1_type, oper2_type):
+        if oper1_type == oper2_type:
+            return True
+        elif oper1_type == 'float' and oper2_type == 'int':
+            return True
+        else:
+            return False
+
+    # def check_operands(self, symbol1, symbol2, operator):
+    #    if symbol1.vs_type == symbol2.vs_type:
+    #        return True
+    #    elif (symbol1.vs_type == 'float' and symbol2.vs_type == 'int' and operator == '='):
+    #        return True
+    #    else:
+    #         return True
+
 
 
 

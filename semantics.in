@@ -5,7 +5,7 @@ int c = 100;
 int foo(int x, float y, string z) {
   int c = 200;
   int f(int a){
-  	int c;
+  	int c = 0;
   	print b;
   }
   print c;
@@ -14,4 +14,6 @@ int foo(int x, float y, string z) {
 }
 
 print a;
-
+a = c;
+b = a;
+a = c + 1;

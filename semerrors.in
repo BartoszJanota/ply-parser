@@ -26,4 +26,6 @@ int foo(int x, float y, string z) {
 }
 
 print a;
+a = g;
+a = b + 1;
 
