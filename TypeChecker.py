@@ -80,11 +80,11 @@ class TypeChecker(object):
             return symbol.type
 
         elif type(symbol) == FunctionSymbol:
-            print 'Symbol ' + symbol.name + ' is a function (expected variable)!'
+            self.handle_error(node.pos, 'Symbol ' + symbol.name + ' is a function (expected a variable)')
             return 'error'
 
         else: # symbol == None
-            print 'Variable ' + node.id + ' is undefined!'
+            self.handle_error(node.pos, 'Symbol ' + node.id + ' is undefined')
             return 'error'
 
 

@@ -221,7 +221,7 @@ class Cparser(object):
 
     def p_expression_id(self, p):
         "expression : ID"
-        p[0] = Variable(p[1])
+        p[0] = Variable(p[1], pos(p))
 
     def p_expression_brackets(self, p):
         "expression : '(' expression ')'"

@@ -38,8 +38,9 @@ class String(Const):
     pass
 
 class Variable(Node):
-  def __init__(self, id):
+  def __init__(self, id, pos):
     self.id = id
+    self.pos = pos
 
 class BinExpr(Node):
   def __init__(self, left, op, right):
