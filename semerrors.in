@@ -31,6 +31,17 @@ int foo(int x, float y, string z, string x) {
   return 5.5;
 }
 
+int f(float x, float b){
+  print x;
+  print f(1, 1);
+  print f(d, 1);
+}
+
+int g(int a){
+  print g(b);
+}
+
+
 print a;
 a = g;
 a = b + 1;

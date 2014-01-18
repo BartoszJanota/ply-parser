@@ -81,6 +81,23 @@ FUNDEF
 | | | c
 | RETURN
 | | a
+FUNDEF
+| f
+| RET
+| | int
+| ARG
+| | float
+| | x
+| PRINT
+| | x
+| PRINT
+| | FUNCALL 
+| | | f
+| | | 1
+| PRINT
+| | FUNCALL 
+| | | f
+| | | 1.0
 PRINT
 | a
 =
@@ -97,5 +114,7 @@ PRINT
 =
 | p
 | *
-| | p
-| | 3
+| | *
+| | | p
+| | | a
+| | 1

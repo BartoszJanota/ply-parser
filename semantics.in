@@ -16,8 +16,16 @@ int foo(int x, float y, string z) {
   return a;
 }
 
+int f(float x){
+  print x;
+  print f(1);
+  print f(1.0);
+}
+
 print a;
 a = c;
 b = a;
 a = c + 1;
-p = p * 3;
+p = (p * a) * 1;
+
+

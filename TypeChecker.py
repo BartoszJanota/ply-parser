@@ -166,7 +166,7 @@ class TypeChecker(object):
                 return 'error'
 
             for actual_type, formal_type, index in zip(actual_types, formal_types, range(1, len(actual) + 1)):
-                if actual_type != formal_type:
+                if actual_type != formal_type and not (actual_type == 'int' and formal_type == 'float'):
                     self.handle_error(node.pos, 'Parameter #' + str(index) + ' expects ' + formal_type + \
                         ', but expression of type ' + actual_type + ' found')
                     return 'error'
