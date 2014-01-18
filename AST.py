@@ -18,11 +18,11 @@ class ErrorNode(Node):
     pass
 
 class Program(Node):
-  def __init__(self, node_info, ext_decls, fundefs, instrs):
-    super(Program, self).__init__(node_info)
+  def __init__(self, ext_decls, fundefs, instrs, pos):  
     self.ext_decls = ext_decls
     self.fundefs = fundefs
     self.instrs = instrs
+    self.pos = pos
     
 class Const(Node):
   def __init__(self, value):
@@ -77,16 +77,16 @@ class PrintInstruction(Node):
     self.expr = expr
 
 class ReturnInstruction(Node):
-  def __init__(self, expr):
+  def __init__(self, expr, pos):
     self.expr = expr
+    self.pos = pos
 
 class DeclarationList(Node):
   def __init__(self, decls):
     self.decls = decls
 
 class Declaration(Node):
-  def __init__(self, node_info, type, inits):
-    super(Declaration, self).__init__(node_info)
+  def __init__(self, type, inits):
     self.type = type
     self.inits = inits
 

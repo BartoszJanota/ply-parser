@@ -133,7 +133,7 @@ class TypeChecker(object):
                 expected_rettype = table.function.rettype
                 if rettype != expected_rettype:
                     print 'Wrong return expression type, expected ' + expected_rettype + \
-                        ', given ' + rettype + '!'
+                        ', given ' + rettype + ' (line ' + str(node.pos.line) + ')!'
 
         else: # global scope
           print 'Return statement used outside a function!'

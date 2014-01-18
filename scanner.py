@@ -19,7 +19,8 @@ class Scanner(object):
       self.lexer.input(text)
 
   def token(self):
-      return self.lexer.token()
+      self.last_token = self.lexer.token()
+      return self.last_token
 
 
 
