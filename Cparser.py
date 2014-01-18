@@ -127,7 +127,7 @@ class Cparser(object):
     
     def p_print_instr(self, p):
         """print_instr : PRINT expression ';' """
-        p[0] = SimpleInstruction(p[1], p[2])
+        p[0] = PrintInstruction(p[2])
 
     def p_print_error(self, p):
         """print_instr : PRINT error ';' """

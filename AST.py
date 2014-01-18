@@ -72,9 +72,8 @@ class InstructionList(Node):
   def __init__(self, instrs):
     self.instrs = instrs
 
-class SimpleInstruction(Node):
-  def __init__(self, kw, expr):
-    self.keyword = kw
+class PrintInstruction(Node):
+  def __init__(self, expr):
     self.expr = expr
 
 class ReturnInstruction(Node):

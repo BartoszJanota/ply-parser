@@ -113,7 +113,7 @@ class TypeChecker(object):
             #print "DEBUG: Captured simple instr " +  str(instr)
 
 
-    def visit_SimpleInstruction(self, node, table):
+    def visit_PrintInstruction(self, node, table):
         node.expr.accept(self, table) 
 
     def visit_ReturnInstruction(self, node, table):

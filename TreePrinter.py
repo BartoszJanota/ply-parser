@@ -55,9 +55,9 @@ class TreePrinter:
       for instr in self.instrs:
         instr.printTree(l)
 
-    @addToClass(AST.SimpleInstruction)
+    @addToClass(AST.PrintInstruction)
     def printTree(self, l):
-      tprint(l, self.keyword.upper())
+      tprint(l, 'PRINT')
       self.expr.printTree(l+1)
 
     @addToClass(AST.ReturnInstruction)
