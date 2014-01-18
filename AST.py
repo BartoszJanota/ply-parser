@@ -63,11 +63,12 @@ class FunctionDefList(Node):
     self.fundefs = fundefs
 
 class FunctionDef(Node):
-  def __init__(self, rettype, name, fmlparams, body):
+  def __init__(self, rettype, name, fmlparams, body, pos):
     self.rettype = rettype
     self.name = name
     self.fmlparams = fmlparams
     self.body = body
+    self.pos = pos
 
 class InstructionList(Node):
   def __init__(self, instrs):

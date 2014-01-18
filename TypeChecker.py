@@ -99,7 +99,7 @@ class TypeChecker(object):
         symbol = FunctionSymbol(node.rettype, node.name, node.fmlparams)
 
         if not table.put(symbol):
-            print 'Symbol ' + symbol.name + ' is already defined!'
+            self.handle_error(node.pos, 'Symbol ' + symbol.name + ' is already defined')
         #else:
             #print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
@@ -109,7 +109,7 @@ class TypeChecker(object):
             id = fmlparam.id
             symbol = VariableSymbol(type, id)
             if not subtable.put(symbol):
-                print 'Parameter ' + id + ' already declared!'
+                self.handle_error(node.pos, 'Parameter ' + id + ' already declared')
 
         node.body.accept(self, subtable)
 

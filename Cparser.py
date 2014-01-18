@@ -301,7 +301,7 @@ class Cparser(object):
 
     def p_fundef(self, p):
         """fundef : TYPE ID '(' args_list_or_empty ')' compound_instr """
-        p[0] = FunctionDef(p[1], p[2], p[4], p[6])
+        p[0] = FunctionDef(p[1], p[2], p[4], p[6], pos(p))
     
     
     def p_args_list_or_empty(self, p):
