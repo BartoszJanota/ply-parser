@@ -60,6 +60,11 @@ class TreePrinter:
       tprint(l, self.keyword.upper())
       self.expr.printTree(l+1)
 
+    @addToClass(AST.ReturnInstruction)
+    def printTree(self, l):
+      tprint(l, 'RETURN')
+      self.expr.printTree(l+1)
+
     @addToClass(AST.Variable)
     def printTree(self, l):
       tprint(l, self.id)

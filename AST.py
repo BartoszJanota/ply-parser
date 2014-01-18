@@ -77,6 +77,10 @@ class SimpleInstruction(Node):
     self.keyword = kw
     self.expr = expr
 
+class ReturnInstruction(Node):
+  def __init__(self, expr):
+    self.expr = expr
+
 class DeclarationList(Node):
   def __init__(self, decls):
     self.decls = decls

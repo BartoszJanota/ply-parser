@@ -182,7 +182,7 @@ class Cparser(object):
     
     def p_return_instr(self, p):
         """return_instr : RETURN expression ';' """
-        p[0] = SimpleInstruction(p[1], p[2])
+        p[0] = ReturnInstruction(p[2])
     
     def p_continue_instr(self, p):
         """continue_instr : CONTINUE ';' """

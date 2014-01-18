@@ -20,9 +20,9 @@ class FunctionSymbol(Symbol):
 
 class SymbolTable(object):
 
-    def __init__(self, parent, name):
-        self.s_table_parent = parent
-        self.s_table_name = name
+    def __init__(self, parent, function):
+        self.parent = parent
+        self.function = function
         self.table = dict()
 
     def put(self, symbol):
@@ -43,6 +43,5 @@ class SymbolTable(object):
         return self.table
 
     def getParent(self):
-        return self.s_table_parent
-
+        return self.parent
 

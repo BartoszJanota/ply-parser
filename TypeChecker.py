@@ -8,12 +8,10 @@ class TypeChecker(object):
 
     def __init__(self):
         self.ttype = Ttype()
-        #self.s_table = SymbolTable('general', None)
 
     def visit_Program(self, node, table):
         #print('Program appeared at line %s' % node.lineno)
-        #table = self.s_table
-        table = SymbolTable(None, 'general')
+        table = SymbolTable(None, None)
         node.ext_decls.accept(self, table)
         node.fundefs.accept(self, table)
         node.instrs.accept(self, table)
@@ -101,7 +99,7 @@ class TypeChecker(object):
         #else:
             #print 'DEBUG: Added function symbol ' + symbol.name + ' with return type ' + symbol.rettype
 
-        node.body.accept(self, SymbolTable(table, 'node.name')) 
+        node.body.accept(self, SymbolTable(table, symbol))
 
 
     def visit_CompoundInstructions(self, node, table):
@@ -118,6 +116,8 @@ class TypeChecker(object):
     def visit_SimpleInstruction(self, node, table):
         node.expr.accept(self, table) 
 
+    def visit_ReturnInstruction(self, node, table):
+        node.expr.accept(self, table) 
 
     def visit_FunctionCall(self, node, table):        
         symbol = table.get(node.id)
