@@ -35,3 +35,4 @@ print a;
 a = g;
 a = b + 1;
 return 555;
+d = d - 1;

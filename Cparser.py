@@ -259,7 +259,7 @@ class Cparser(object):
                       | expression LE expression
                       | expression GE expression"""
 
-        p[0] = BinExpr(p[1], p[2], p[3])
+        p[0] = BinExpr(p[1], p[2], p[3], pos(p))
 
     
     def p_expr_list_non_empty(self, p):

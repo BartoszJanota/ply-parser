@@ -1,6 +1,7 @@
 int a = 10;
 float b = 10, bb = 8;
 int c = 100;
+string p = 'a';
 
 int foo(int x, float y, string z) {
   int c = 200;
@@ -19,3 +20,4 @@ print a;
 a = c;
 b = a;
 a = c + 1;
+p = p * 3;

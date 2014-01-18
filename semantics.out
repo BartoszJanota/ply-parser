@@ -1,3 +1,5 @@
+Illegal character ''' (0x27) in line 4
+Illegal character ''' (0x27) in line 4
 DECL
 | int
 | | =
@@ -16,6 +18,11 @@ DECL
 | | =
 | | | c
 | | | 100
+DECL
+| string
+| | =
+| | | p
+| | | a
 FUNDEF
 | foo
 | RET
@@ -87,3 +94,8 @@ PRINT
 | +
 | | c
 | | 1
+=
+| p
+| *
+| | p
+| | 3

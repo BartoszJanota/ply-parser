@@ -47,6 +47,11 @@ class TypeChecker(object):
         op = node.op
 
         result_type = self.ttype.getTtypeOrError(op, type1, type2)
+        if result_type == 'error':
+            #binExpr nie ma pola pos!!
+            self.handle_error(node.pos, 'Error: Operand ' + type1 + ' and operand ' + type2 + ' are not allowed for \'' + op + '\' operator.')
+            return 'error'
+        
         #print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
         #    ', the result type is ' + result_type
             

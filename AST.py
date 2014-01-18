@@ -43,10 +43,11 @@ class Variable(Node):
     self.pos = pos
 
 class BinExpr(Node):
-  def __init__(self, left, op, right):
+  def __init__(self, left, op, right, pos):
     self.left = left
     self.op = op
     self.right = right
+    self.pos = pos
     #sprint(left, op, right)
 
 class ExprList(Node):

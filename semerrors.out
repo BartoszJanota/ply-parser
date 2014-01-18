@@ -181,6 +181,11 @@ PRINT
 | | 1
 RETURN
 | 555
+=
+| d
+| -
+| | d
+| | 1
 Line 2: Symbol a is already defined
 Line 2: Symbol b is already defined
 Line 33: Parameter x already declared
@@ -193,6 +198,7 @@ Line 19: Variable xxx to be assigned is unknown
 Line 19: Parameter #2 expects float, but expression of type int found
 Line 20: Symbol wrong_variable is undefined
 Line 21: Function wrong_function is undefined
+Line 22: Error: Operand int and operand string are not allowed for '+' operator.
 Line 23: The function foo expects 4 parameters, but 2 given
 Line 24: Function outer_undefined is undefined
 Line 25: Function foobar is undefined
@@ -204,3 +210,4 @@ Line 31: Wrong return expression type, expected int, given float
 Line 34: Symbol g is undefined
 Line 36: Cannot assign a float to an int variable
 Line 37: Return statement used outside a function
+Line 37: Error: Operand string and operand int are not allowed for '-' operator.
