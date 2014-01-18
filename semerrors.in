@@ -17,7 +17,7 @@ int foo(int x, float y, string z, string x) {
   y = z;
   x = y;
   xxx = 15;
-  print foo(c, a + c, "bar");
+  print foo(c, a + c, "bar", "baz");
   print wrong_variable;
   print wrong_function(c, 5.5, "bar");
   print foo(c, a + d, "bar");

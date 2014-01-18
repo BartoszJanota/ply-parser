@@ -133,7 +133,7 @@ class TypeChecker(object):
                 expected_rettype = table.function.rettype
                 if rettype != expected_rettype:
                     print 'Wrong return expression type, expected ' + expected_rettype + \
-                        ', given ' + rettype
+                        ', given ' + rettype + '!'
 
         else: # global scope
           print 'Return statement used outside a function!'
@@ -159,7 +159,7 @@ class TypeChecker(object):
             for actual_type, formal_type, index in zip(actual_types, formal_types, range(1, len(actual) + 1)):
                 if actual_type != formal_type:
                     print 'Parameter #' + str(index) + ' expects ' + formal_type + \
-                        ', but expression of type ' + actual_type + ' found'
+                        ', but expression of type ' + actual_type + ' found!'
                     return 'error'
 
             return symbol.rettype
