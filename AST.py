@@ -86,9 +86,10 @@ class DeclarationList(Node):
     self.decls = decls
 
 class Declaration(Node):
-  def __init__(self, type, inits):
+  def __init__(self, type, inits, pos):
     self.type = type
     self.inits = inits
+    self.pos = pos
 
 class InitList(Node):
   def __init__(self, inits):

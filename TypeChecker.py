@@ -33,7 +33,7 @@ class TypeChecker(object):
         for init in node.inits.inits:
             symbol = VariableSymbol(d_type, init.id)
             if not table.put(symbol):
-                print 'Symbol ' + symbol.name + ' is already defined!'
+                self.handle_error(node.pos, 'Symbol ' + symbol.name + ' is already defined')
             #else:
                 #print 'DEBUG: Added variable symbol ' + symbol.name + ' of the type ' + d_type
 
