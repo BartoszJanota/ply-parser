@@ -185,7 +185,7 @@ class TypeChecker(object):
         rhs_type = node.expr.accept(self, table)
 
         if lhs_type == None:
-            print 'Variable ' + node.id + ' to be assigned is unknown!'
+            self.handle_error(node.pos, 'Variable ' + node.id + ' to be assigned is unknown')
 
         elif rhs_type == 'error':
             pass
@@ -193,9 +193,8 @@ class TypeChecker(object):
         elif not self.check_assignment(lhs_type, rhs_type):
             art1 = 'a' if str(lhs_type) == 'int' else 'an'
             art2 = 'a' if str(rhs_type) == 'int' else 'an'
-            print 'Cannot assign ' + art1 + ' ' + str(rhs_type) + ' to ' + art2 + ' ' + str(lhs_type) + ' variable!'
-
-        return True    
+            self.handle_error(node.pos, 'Cannot assign ' + art1 + ' ' + str(rhs_type) +\
+                ' to ' + art2 + ' ' + str(lhs_type) + ' variable')
 
 
     def check_assignment(self, oper1_type, oper2_type):

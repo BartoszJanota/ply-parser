@@ -141,7 +141,7 @@ class Cparser(object):
     def p_assignment(self, p):
         """assignment : ID '=' expression ';' """
         if p[3]:
-            p[0] = Assignment(p[1], p[3])
+            p[0] = Assignment(p[1], p[3], pos(p))
         else: # error
             pass
     
