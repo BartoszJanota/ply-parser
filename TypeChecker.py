@@ -175,16 +175,23 @@ class TypeChecker(object):
             return 'error'
 
     def visit_Assignment(self, node, table):
-        oper1_type = node.expr1.accept(self, table)
-        oper2_type = node.expr2.accept(self, table)
-        if oper1_type == 'error' or oper2_type == 'error':
-            return 'error'
-        if not self.check_assignment(oper1_type, oper2_type):
-            art1 = 'a' if str(oper1_type) == 'int' else 'an'
-            art2 = 'a' if str(oper2_type) == 'int' else 'an'
-            print 'Cannot assign ' + art1 + ' ' + str(oper2_type) + ' operand to ' + art2 + ' ' + str(oper1_type) + ' operand.'
+        
+        lhs_type = table.get(node.id)
+        if lhs_type: lhs_type = lhs_type.type
+        rhs_type = node.expr.accept(self, table)
+
+        if lhs_type == None:
+            print 'Variable ' + node.id + ' to be assigned is unknown!'
+
+        elif rhs_type == 'error':
+            pass
+
+        elif not self.check_assignment(lhs_type, rhs_type):
+            art1 = 'a' if str(lhs_type) == 'int' else 'an'
+            art2 = 'a' if str(rhs_type) == 'int' else 'an'
+            print 'Cannot assign ' + art1 + ' ' + str(rhs_type) + ' to ' + art2 + ' ' + str(lhs_type) + ' variable!'
+
         return True    
-        #print 'DEBUG: Captured assingment ' + str(node.expr1) + ' = ' + str(node.expr2)
 
 
     def check_assignment(self, oper1_type, oper2_type):

@@ -13,6 +13,10 @@ int foo(int x, float y, string z, string x) {
     int e = 200;
     print c; 
   }
+  x = z;
+  y = z;
+  x = y;
+  xxx = 15;
   print foo(c, a + c, "bar");
   print wrong_variable;
   print wrong_function(c, 5.5, "bar");

@@ -79,6 +79,18 @@ FUNDEF
 | | | | | 200
 | | PRINT
 | | | c
+| =
+| | x
+| | z
+| =
+| | y
+| | z
+| =
+| | x
+| | y
+| =
+| | xxx
+| | 15
 | PRINT
 | | FUNCALL 
 | | | foo
@@ -171,6 +183,10 @@ Symbol b is already defined!
 Parameter x already declared!
 Symbol c is already defined!
 Symbol e is already defined!
+Cannot assign a string to an int variable!
+Cannot assign an string to an float variable!
+Cannot assign a float to an int variable!
+Variable xxx to be assigned is unknown!
 The function foo expects 4 parameters, but 3 given!
 Variable wrong_variable is undefined!
 Function wrong_function is undefined!
@@ -183,4 +199,4 @@ Wrong return expression type, expected int, given string
 Wrong return expression type, expected int, given string
 Wrong return expression type, expected int, given float
 Variable g is undefined!
-Cannot assign a float operand to an int operand.
+Cannot assign a float to an int variable!
