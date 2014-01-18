@@ -68,6 +68,12 @@ FUNDEF
 | | | *
 | | | | "bar"
 | | | | a
+| RETURN
+| | /
+| | | a
+| | | c
+| RETURN
+| | a
 PRINT
 | a
 =

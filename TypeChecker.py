@@ -117,7 +117,18 @@ class TypeChecker(object):
         node.expr.accept(self, table) 
 
     def visit_ReturnInstruction(self, node, table):
-        node.expr.accept(self, table) 
+
+        if table.function:
+
+            rettype = node.expr.accept(self, table)
+            if rettype != 'error':
+                expected_rettype = table.function.rettype
+                if rettype != expected_rettype:
+                    print 'Wrong return expression type, expected ' + expected_rettype + \
+                        ', given ' + rettype
+
+        else: # global scope
+          print 'Return statement used outside a function!'
 
     def visit_FunctionCall(self, node, table):        
         symbol = table.get(node.id)

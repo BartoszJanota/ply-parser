@@ -12,7 +12,6 @@ int foo(int x, float y, string z) {
     int e = 4;
     int e = 200;
     print c; 
-    /*bez print a; wywala sie parser!!!*/
   }
   print foo(c, a + c, "bar");
   print wrong_variable;
@@ -23,6 +22,8 @@ int foo(int x, float y, string z) {
   print a + foobar(c, 5.5);
   print foo(c, b + d(5), "bar");
   print foo(c, b + foo, "bar");
+  return d + d;
+  return 5.5;
 }
 
 print a;

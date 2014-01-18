@@ -143,6 +143,12 @@ FUNDEF
 | | | | b
 | | | | foo
 | | | "bar"
+| RETURN
+| | +
+| | | d
+| | | d
+| RETURN
+| | 5.5
 PRINT
 | a
 =
@@ -165,5 +171,7 @@ Function outer_undefined is undefined!
 Function foobar is undefined!
 Symbol d is a variable (expected function)!
 Symbol foo is a function (expected variable)!
+Wrong return expression type, expected int, given string
+Wrong return expression type, expected int, given float
 Variable g is undefined!
-Cannot assign float operand to int operand.
+Cannot assign a float operand to an int operand.
