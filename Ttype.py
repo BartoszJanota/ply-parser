@@ -3,7 +3,7 @@
 class Ttype(object):
 
     types = ['int', 'float', 'string']
-    operators = ['+', '-', '*', '/', '%', '|', '&', '^', 'AND', 'OR', 'SHL', 'SHR']
+    operators = ['+', '-', '*', '/', '%', '|', '&', '^', 'AND', 'OR', 'SHL', 'SHR', '<' , '>', '==', '!=', 'GE', 'LE']
     ttype = None
 
     def __init__(self): 
@@ -27,7 +27,52 @@ class Ttype(object):
         self.ttype['/']['float']['int'] = 'float'
         self.ttype['/']['int']['int'] = 'int'
         self.ttype['/']['float']['float'] = 'float'
-        #ttype[''][''][''] = ''
+        # self.ttype['/'][''][''] = ''
+        # self.ttype['%'][''][''] = ''
+        # self.ttype['|'][''][''] = ''
+        # self.ttype['&'][''][''] = ''
+        # self.ttype['^'][''][''] = ''
+        # self.ttype['AND'][''][''] = ''
+        # self.ttype['OR'][''][''] = ''
+        # self.ttype['SHL'][''][''] = ''
+        # self.ttype['SHR'][''][''] = ''
+        self.ttype['<']['int']['int'] = 'int'
+        self.ttype['<']['int']['float'] = 'int'
+        self.ttype['<']['float']['int'] = 'int'
+        self.ttype['<']['float']['int'] = 'int'
+        self.ttype['<']['float']['float'] = 'int'
+        self.ttype['<']['string']['string'] = 'int'
+        self.ttype['>']['int']['int'] = 'int'
+        self.ttype['>']['int']['float'] = 'int'
+        self.ttype['>']['float']['int'] = 'int'
+        self.ttype['>']['float']['int'] = 'int'
+        self.ttype['>']['float']['float'] = 'int'
+        self.ttype['>']['string']['string'] = 'int'
+        self.ttype['==']['int']['int'] = 'int'
+        self.ttype['==']['int']['float'] = 'int'
+        self.ttype['==']['float']['int'] = 'int'
+        self.ttype['==']['float']['int'] = 'int'
+        self.ttype['==']['float']['float'] = 'int'
+        self.ttype['==']['string']['string'] = 'int'
+        self.ttype['!=']['int']['int'] = 'int'
+        self.ttype['!=']['int']['float'] = 'int'
+        self.ttype['!=']['float']['int'] = 'int'
+        self.ttype['!=']['float']['int'] = 'int'
+        self.ttype['!=']['float']['float'] = 'int'
+        self.ttype['!=']['string']['string'] = 'int'
+        self.ttype['LE']['int']['int'] = 'int'
+        self.ttype['LE']['int']['float'] = 'int'
+        self.ttype['LE']['float']['int'] = 'int'
+        self.ttype['LE']['float']['int'] = 'int'
+        self.ttype['LE']['float']['float'] = 'int'
+        self.ttype['LE']['string']['string'] = 'int'
+        self.ttype['GE']['int']['int'] = 'int'
+        self.ttype['GE']['int']['float'] = 'int'
+        self.ttype['GE']['float']['int'] = 'int'
+        self.ttype['GE']['float']['int'] = 'int'
+        self.ttype['GE']['float']['float'] = 'int'
+        self.ttype['GE']['string']['string'] = 'int'
+
 
     def getTtype(self,op,left,right):
         return self.ttype[op][left][right]

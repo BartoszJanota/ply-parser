@@ -49,7 +49,7 @@ class TypeChecker(object):
         result_type = self.ttype.getTtypeOrError(op, type1, type2)
         if result_type == 'error':
             #binExpr nie ma pola pos!!
-            self.handle_error(node.pos, 'Error: Operand ' + type1 + ' and operand ' + type2 + ' are not allowed for \'' + op + '\' operator.')
+            self.handle_error(node.pos, 'Error: Left ' + type1 + ' operand and right ' + type2 + ' operand are not allowed for \'' + op + '\' operator.')
             return 'error'
         
         #print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
@@ -58,9 +58,12 @@ class TypeChecker(object):
         return result_type 
         
  
-    def visit_RelExpr(self, node, table):
-        type1 = node.left.accept(self, table);
-        type2 = node.right.accept(self, table);
+    def visit_ChoiceInstruction(self, node, table):
+        cond_type = node.cond.accept(self, table);
+        ithen = node.ithen.accept(self, SymbolTable(table, 'ithen'));
+        ielse = None
+        if node.ielse is not None:
+            ielse = node.ielse.accept(self, SymbolTable(table, 'ielse'));
         # ...         
 
 

@@ -41,6 +41,19 @@ int g(int a){
   print g(b);
 }
 
+if (a > 1) {
+  int a = 1;
+  ina a = 10;
+  print a;
+} else {
+  int b;
+  print b;
+}
+
+if (a == d) {
+  print a;
+}
+
 
 print a;
 a = g;

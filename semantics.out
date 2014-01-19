@@ -118,3 +118,29 @@ PRINT
 | | | p
 | | | a
 | | 1
+IF
+| >
+| | a
+| | 1
+| THEN
+| | DECL
+| | | int
+| | | | =
+| | | | | a
+| | | | | 1
+| | PRINT
+| | | a
+| ELSE
+| | PRINT
+| | | b
+WHILE
+| >
+| | a
+| | 1
+| DECL
+| | int
+| | | =
+| | | | b
+| | | | 10
+| PRINT
+| | a

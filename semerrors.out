@@ -1,3 +1,5 @@
+Syntax error in declaration at line 46, column 7, at token LexToken(ID, 'a')
+Syntax error in declaration at line 49, column 8, at token LexToken(;, ';')
 DECL
 | int
 | | =
@@ -202,6 +204,28 @@ FUNDEF
 | | FUNCALL 
 | | | g
 | | | b
+IF
+| >
+| | a
+| | 1
+| THEN
+| | DECL
+| | | int
+| | | | =
+| | | | | a
+| | | | | 1
+| | PRINT
+| | | a
+| ELSE
+| | PRINT
+| | | b
+IF
+| ==
+| | a
+| | d
+| THEN
+| | PRINT
+| | | a
 PRINT
 | a
 =
@@ -230,7 +254,7 @@ Line 18: Cannot assign a float to an int variable
 Line 19: Variable xxx to be assigned is unknown
 Line 20: Symbol wrong_variable is undefined
 Line 21: Function wrong_function is undefined
-Line 22: Error: Operand int and operand string are not allowed for '+' operator.
+Line 22: Error: Left int operand and right string operand are not allowed for '+' operator.
 Line 23: The function foo expects 4 parameters, but 2 given
 Line 24: Function outer_undefined is undefined
 Line 25: Function foobar is undefined
@@ -241,7 +265,8 @@ Line 30: Wrong return expression type, expected int, given string
 Line 31: Wrong return expression type, expected int, given float
 Line 36: Parameter #1 expects float, but expression of type string found
 Line 40: Parameter #1 expects int, but expression of type float found
-Line 45: Symbol g is a function (expected a variable)
-Line 47: Cannot assign a float to an int variable
-Line 48: Return statement used outside a function
-Line 48: Error: Operand string and operand int are not allowed for '-' operator.
+Line 52: Error: Left int operand and right string operand are not allowed for '==' operator.
+Line 58: Symbol g is a function (expected a variable)
+Line 60: Cannot assign a float to an int variable
+Line 61: Return statement used outside a function
+Line 61: Error: Left string operand and right int operand are not allowed for '-' operator.
