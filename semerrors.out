@@ -254,6 +254,71 @@ RETURN
 | -
 | | d
 | | 1
+REPEAT
+| DECL
+| | int
+| | | =
+| | | | a
+| | | | 1
+| | | =
+| | | | b
+| | | | 2
+| DECL
+| | float
+| | | =
+| | | | c
+| | | | 3.3
+| | | =
+| | | | d
+| | | | 4.4
+| DECL
+| | string
+| | | =
+| | | | e
+| | | | "eee"
+| | | =
+| | | | f
+| | | | "fff"
+| PRINT
+| | +
+| | | a
+| | | e
+| PRINT
+| | *
+| | | e
+| | | a
+| PRINT
+| | /
+| | | c
+| | | f
+| PRINT
+| | %
+| | | c
+| | | f
+| PRINT
+| | /
+| | | b
+| | | f
+| PRINT
+| | %
+| | | b
+| | | f
+| PRINT
+| | &
+| | | b
+| | | c
+| PRINT
+| | ^
+| | | c
+| | | f
+| PRINT
+| | |
+| | | e
+| | | a
+UNTIL
+| >
+| | a
+| | 1
 Line 2: Symbol a is already defined
 Line 2: Symbol b is already defined
 Line 33: Parameter x already declared
@@ -282,3 +347,11 @@ Line 63: Symbol g is a function (expected a variable)
 Line 65: Cannot assign a float to an int variable
 Line 66: Return statement used outside a function
 Line 66: Error: Left string operand and right int operand are not allowed for '-' operator.
+Line 74: Error: Left int operand and right string operand are not allowed for '+' operator.
+Line 76: Error: Left float operand and right string operand are not allowed for '/' operator.
+Line 77: Error: Left float operand and right string operand are not allowed for '%' operator.
+Line 78: Error: Left int operand and right string operand are not allowed for '/' operator.
+Line 79: Error: Left int operand and right string operand are not allowed for '%' operator.
+Line 81: Error: Left int operand and right float operand are not allowed for '&' operator.
+Line 82: Error: Left float operand and right string operand are not allowed for '^' operator.
+Line 83: Error: Left string operand and right int operand are not allowed for '|' operator.

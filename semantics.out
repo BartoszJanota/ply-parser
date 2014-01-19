@@ -1,5 +1,3 @@
-Illegal character ''' (0x27) in line 4
-Illegal character ''' (0x27) in line 4
 DECL
 | int
 | | =
@@ -22,7 +20,7 @@ DECL
 | string
 | | =
 | | | p
-| | | a
+| | | "a"
 FUNDEF
 | foo
 | RET
@@ -144,3 +142,73 @@ WHILE
 | | | | 10
 | PRINT
 | | a
+REPEAT
+| PRINT
+| | a
+UNTIL
+| >
+| | a
+| | 1
+REPEAT
+| DECL
+| | int
+| | | =
+| | | | a
+| | | | 1
+| | | =
+| | | | b
+| | | | 2
+| DECL
+| | float
+| | | =
+| | | | c
+| | | | 3.3
+| | | =
+| | | | d
+| | | | 4.4
+| DECL
+| | string
+| | | =
+| | | | e
+| | | | "eee"
+| | | =
+| | | | f
+| | | | "fff"
+| PRINT
+| | +
+| | | a
+| | | b
+| PRINT
+| | *
+| | | a
+| | | c
+| PRINT
+| | /
+| | | c
+| | | a
+| PRINT
+| | %
+| | | c
+| | | d
+| PRINT
+| | +
+| | | e
+| | | f
+| PRINT
+| | *
+| | | e
+| | | a
+| PRINT
+| | |
+| | | &
+| | | | a
+| | | | ^
+| | | | | b
+| | | | | a
+| | | &
+| | | | a
+| | | | b
+UNTIL
+| >
+| | a
+| | 1

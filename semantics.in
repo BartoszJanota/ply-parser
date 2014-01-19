@@ -55,5 +55,8 @@ repeat {
     print c % d;
     print e + f;
     print e * a;
+
+    print a & (b ^ a) | (a & b);
+
 } until a > 1;
 

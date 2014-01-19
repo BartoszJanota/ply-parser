@@ -78,5 +78,9 @@ repeat {
     print c % f;
     print b / f;
     print b % f;
+
+    print b & c;
+    print c ^ f;
+    print e | a;
 } until a > 1;
 
