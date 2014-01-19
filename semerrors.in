@@ -43,10 +43,10 @@ int g(int a){
 
 if (a > 1) {
   int a = 1;
-  ina a = 10;
+  int a = 10;
   print a;
 } else {
-  int b;
+  int b = 7;
   print b;
 }
 
@@ -82,5 +82,10 @@ repeat {
     print b & c;
     print c ^ f;
     print e | a;
+
+    print a && c;
+    print d || b;
+    print e << f;
+    print (a >> e);
 } until a > 1;
 

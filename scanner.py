@@ -82,13 +82,14 @@ class Scanner(object):
       return t
   
   t_LE = r"<="
-    
   t_GE = r">="
-  
   t_EQ = r"=="
-  
   t_NEQ = r"!="
 
+  t_SHL = r"<<"
+  t_SHR = r">>"
+  t_AND = r"&&"
+  t_OR = r"\|\|"
 
   def t_TYPE(self,t):
       r"\b(int|float|string)\b"

@@ -48,7 +48,7 @@ class TypeChecker(object):
 
         result_type = self.ttype.getTtypeOrError(op, type1, type2)
         if result_type == 'error':
-            self.handle_error(node.pos, 'Error: Left ' + type1 + ' operand and right ' + type2 + ' operand are not allowed for \'' + op + '\' operator.')
+            self.handle_error(node.pos, 'Error: Left ' + type1 + ' operand and right ' + type2 + ' operand are not allowed for \'' + op + '\' operator')
             return 'error'
         #print 'DEBUG: Captured expression ' + type1 + ' ' + op + ' ' + type2 + \
         #    ', the result type is ' + result_type

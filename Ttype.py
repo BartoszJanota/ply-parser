@@ -67,7 +67,7 @@ class Ttype(object):
         
     def populateLogicalAndShifts(self):
      
-        for op in '&', '^', '|':
+        for op in '&', '^', '|', '&&', '||', '>>', '<<':
             self.ttype[op]['int']['int'] = 'int'
        
 

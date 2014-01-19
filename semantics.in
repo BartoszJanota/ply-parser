@@ -58,5 +58,7 @@ repeat {
 
     print a & (b ^ a) | (a & b);
 
+    print a && (b || a) << (a >> b);
+
 } until a > 1;
 

@@ -1,5 +1,3 @@
-Syntax error in declaration at line 46, column 7, at token LexToken(ID, 'a')
-Syntax error in declaration at line 49, column 8, at token LexToken(;, ';')
 DECL
 | int
 | | =
@@ -214,9 +212,19 @@ IF
 | | | | =
 | | | | | a
 | | | | | 1
+| | DECL
+| | | int
+| | | | =
+| | | | | a
+| | | | | 10
 | | PRINT
 | | | a
 | ELSE
+| | DECL
+| | | int
+| | | | =
+| | | | | b
+| | | | | 7
 | | PRINT
 | | | b
 IF
@@ -315,6 +323,22 @@ REPEAT
 | | |
 | | | e
 | | | a
+| PRINT
+| | &&
+| | | a
+| | | c
+| PRINT
+| | ||
+| | | d
+| | | b
+| PRINT
+| | <<
+| | | e
+| | | f
+| PRINT
+| | >>
+| | | a
+| | | e
 UNTIL
 | >
 | | a
@@ -330,7 +354,7 @@ Line 18: Cannot assign a float to an int variable
 Line 19: Variable xxx to be assigned is unknown
 Line 20: Symbol wrong_variable is undefined
 Line 21: Function wrong_function is undefined
-Line 22: Error: Left int operand and right string operand are not allowed for '+' operator.
+Line 22: Error: Left int operand and right string operand are not allowed for '+' operator
 Line 23: The function foo expects 4 parameters, but 2 given
 Line 24: Function outer_undefined is undefined
 Line 25: Function foobar is undefined
@@ -341,17 +365,22 @@ Line 30: Wrong return expression type, expected int, given string
 Line 31: Wrong return expression type, expected int, given float
 Line 36: Parameter #1 expects float, but expression of type string found
 Line 40: Parameter #1 expects int, but expression of type float found
-Line 52: Error: Left int operand and right string operand are not allowed for '==' operator.
-Line 56: Error: Left int operand and right string operand are not allowed for '>' operator.
+Line 46: Symbol a is already defined
+Line 52: Error: Left int operand and right string operand are not allowed for '==' operator
+Line 56: Error: Left int operand and right string operand are not allowed for '>' operator
 Line 63: Symbol g is a function (expected a variable)
 Line 65: Cannot assign a float to an int variable
 Line 66: Return statement used outside a function
-Line 66: Error: Left string operand and right int operand are not allowed for '-' operator.
-Line 74: Error: Left int operand and right string operand are not allowed for '+' operator.
-Line 76: Error: Left float operand and right string operand are not allowed for '/' operator.
-Line 77: Error: Left float operand and right string operand are not allowed for '%' operator.
-Line 78: Error: Left int operand and right string operand are not allowed for '/' operator.
-Line 79: Error: Left int operand and right string operand are not allowed for '%' operator.
-Line 81: Error: Left int operand and right float operand are not allowed for '&' operator.
-Line 82: Error: Left float operand and right string operand are not allowed for '^' operator.
-Line 83: Error: Left string operand and right int operand are not allowed for '|' operator.
+Line 66: Error: Left string operand and right int operand are not allowed for '-' operator
+Line 74: Error: Left int operand and right string operand are not allowed for '+' operator
+Line 76: Error: Left float operand and right string operand are not allowed for '/' operator
+Line 77: Error: Left float operand and right string operand are not allowed for '%' operator
+Line 78: Error: Left int operand and right string operand are not allowed for '/' operator
+Line 79: Error: Left int operand and right string operand are not allowed for '%' operator
+Line 81: Error: Left int operand and right float operand are not allowed for '&' operator
+Line 82: Error: Left float operand and right string operand are not allowed for '^' operator
+Line 83: Error: Left string operand and right int operand are not allowed for '|' operator
+Line 85: Error: Left int operand and right float operand are not allowed for '&&' operator
+Line 86: Error: Left float operand and right int operand are not allowed for '||' operator
+Line 87: Error: Left string operand and right string operand are not allowed for '<<' operator
+Line 88: Error: Left int operand and right string operand are not allowed for '>>' operator
