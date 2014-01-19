@@ -1,7 +1,7 @@
 int a = 10;
 float b = 10, bb = 8;
 int c = 100;
-string p = 'a';
+string p = "a";
 
 int foo(int x, float y, string z) {
   int c = 200;
@@ -44,4 +44,16 @@ repeat {
   print a;
 } until a > 1;
 
+repeat {
+    int a = 1, b = 2;
+    float c = 3.3, d = 4.4;
+    string e = "eee", f = "fff";
+
+    print a + b;
+    print a * c;
+    print c / a;
+    print c % d;
+    print e + f;
+    print e * a;
+} until a > 1;
 

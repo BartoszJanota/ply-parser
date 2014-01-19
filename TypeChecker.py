@@ -127,14 +127,15 @@ class TypeChecker(object):
 
 
     def visit_CompoundInstructions(self, node, table):
-        node.decls.accept(self, table)
-        node.instrs.accept(self, table)
+
+        subtable = SymbolTable(table, table.function)
+        node.decls.accept(self, subtable)
+        node.instrs.accept(self, subtable)
 
 
     def visit_InstructionList(self, node, table):
         for instr in node.instrs:
             instr.accept(self, table)
-            #print "DEBUG: Captured simple instr " +  str(instr)
 
 
     def visit_PrintInstruction(self, node, table):
@@ -216,9 +217,6 @@ class TypeChecker(object):
             return True
         else:
             return False
-
-
-
 
 
 

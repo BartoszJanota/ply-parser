@@ -9,29 +9,13 @@ class Ttype(object):
     def __init__(self): 
 
         self.ttype = dict((op, dict((type1, dict(dict((type2, '') for type2 in self.types))) for type1 in self.types)) for op in self.operators)
-        self.ttype['+']['int']['float'] = 'float'
-        self.ttype['+']['float']['int'] = 'float'
-        self.ttype['+']['int']['int'] = 'int'
+
+        self.populateArithmetical()
         self.ttype['+']['string']['string'] = 'string'
-        self.ttype['+']['float']['float'] = 'float'
-        self.ttype['-']['int']['float'] = 'float'
-        self.ttype['-']['float']['int'] = 'float'
-        self.ttype['-']['int']['int'] = 'int'
-        self.ttype['-']['float']['float'] = 'float'
-        self.ttype['*']['int']['float'] = 'float'
-        self.ttype['*']['float']['int'] = 'float'
-        self.ttype['*']['int']['int'] = 'int'
         self.ttype['*']['string']['int'] = 'string'
-        self.ttype['*']['float']['float'] = 'float'
-        self.ttype['/']['int']['float'] = 'float'
-        self.ttype['/']['float']['int'] = 'float'
-        self.ttype['/']['int']['int'] = 'int'
-        self.ttype['/']['float']['float'] = 'float'
-        # self.ttype['/'][''][''] = ''
-        # self.ttype['%'][''][''] = ''
-        # self.ttype['|'][''][''] = ''
-        # self.ttype['&'][''][''] = ''
-        # self.ttype['^'][''][''] = ''
+
+        self.populateLogicalAndShifts()
+
         # self.ttype['&&'][''][''] = ''
         # self.ttype['||'][''][''] = ''
         # self.ttype['<<'][''][''] = ''
@@ -73,6 +57,19 @@ class Ttype(object):
         self.ttype['<=']['float']['float'] = 'int'
         self.ttype['<=']['string']['string'] = 'int'
 
+    def populateArithmetical(self):
+
+        for op in '+-*/%':
+            self.ttype[op]['int']['float'] = 'float'
+            self.ttype[op]['float']['int'] = 'float'
+            self.ttype[op]['int']['int'] = 'int'
+            self.ttype[op]['float']['float'] = 'float'
+        
+    def populateLogicalAndShifts(self):
+     
+        for op in '&', '^', '|':
+            self.ttype[op]['int']['int'] = 'int'
+       
 
     def getTtype(self,op,left,right):
         return self.ttype[op][left][right]

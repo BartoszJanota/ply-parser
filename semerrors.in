@@ -65,3 +65,18 @@ a = g;
 a = b + 1;
 return 555;
 d = d - 1;
+
+
+repeat {
+    int a = 1, b = 2;
+    float c = 3.3, d = 4.4;
+    string e = "eee", f = "fff";
+
+    print a + e;
+    print e * a;
+    print c / f;
+    print c % f;
+    print b / f;
+    print b % f;
+} until a > 1;
+
