@@ -69,6 +69,10 @@ class TypeChecker(object):
         cond_type = node.cond.accept(self, table);
         instr = node.instr.accept(self, SymbolTable(table, 'while'));
 
+    def visit_RepeatInstruction(self, node, table):
+        cond_type = node.cond.accept(self, table);
+        instrs = node.instrs.accept(self, SymbolTable(table, 'repeat'));
+
     def visit_Integer(self, node, table):
         return 'int'
 

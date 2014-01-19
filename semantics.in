@@ -40,4 +40,8 @@ while(a > 1){
   print a;
 }
 
+repeat {
+  print a;
+} until a > 1;
+
 
