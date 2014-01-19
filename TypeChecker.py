@@ -64,8 +64,10 @@ class TypeChecker(object):
         ielse = None
         if node.ielse is not None:
             ielse = node.ielse.accept(self, SymbolTable(table, 'ielse'));
-        # ...         
 
+    def visit_WhileInstruction(self, node, table):
+        cond_type = node.cond.accept(self, table);
+        instr = node.instr.accept(self, SymbolTable(table, 'while'));
 
     def visit_Integer(self, node, table):
         return 'int'
