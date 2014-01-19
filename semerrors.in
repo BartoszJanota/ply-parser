@@ -87,5 +87,12 @@ repeat {
     print d || b;
     print e << f;
     print (a >> e);
+
+    print a < e;
+    print e > c;
+    print c <= f;
+    print a >= f;
+    print b != f;
+    print f == b;
 } until a > 1;
 

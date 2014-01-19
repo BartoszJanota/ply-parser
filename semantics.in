@@ -60,5 +60,8 @@ repeat {
 
     print a && (b || a) << (a >> b);
 
+    print (a < b) + (b > a) + (a <= c) + (c >= d) + (a != d) + (d == b);
+    print (e < f) + (f > e) + (e <= e) + (e >= f) + (e != f) + (f == f);
+
 } until a > 1;
 

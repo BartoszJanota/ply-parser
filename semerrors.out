@@ -339,6 +339,30 @@ REPEAT
 | | >>
 | | | a
 | | | e
+| PRINT
+| | <
+| | | a
+| | | e
+| PRINT
+| | >
+| | | e
+| | | c
+| PRINT
+| | <=
+| | | c
+| | | f
+| PRINT
+| | >=
+| | | a
+| | | f
+| PRINT
+| | !=
+| | | b
+| | | f
+| PRINT
+| | ==
+| | | f
+| | | b
 UNTIL
 | >
 | | a
@@ -384,3 +408,9 @@ Line 85: Error: Left int operand and right float operand are not allowed for '&&
 Line 86: Error: Left float operand and right int operand are not allowed for '||' operator
 Line 87: Error: Left string operand and right string operand are not allowed for '<<' operator
 Line 88: Error: Left int operand and right string operand are not allowed for '>>' operator
+Line 90: Error: Left int operand and right string operand are not allowed for '<' operator
+Line 91: Error: Left string operand and right float operand are not allowed for '>' operator
+Line 92: Error: Left float operand and right string operand are not allowed for '<=' operator
+Line 93: Error: Left int operand and right string operand are not allowed for '>=' operator
+Line 94: Error: Left int operand and right string operand are not allowed for '!=' operator
+Line 95: Error: Left string operand and right int operand are not allowed for '==' operator

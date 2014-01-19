@@ -10,54 +10,16 @@ class Ttype(object):
 
         self.ttype = dict((op, dict((type1, dict(dict((type2, '') for type2 in self.types))) for type1 in self.types)) for op in self.operators)
 
-        self.populateArithmetical()
+        self.populateArithmetic()
         self.ttype['+']['string']['string'] = 'string'
         self.ttype['*']['string']['int'] = 'string'
 
         self.populateLogicalAndShifts()
 
-        # self.ttype['&&'][''][''] = ''
-        # self.ttype['||'][''][''] = ''
-        # self.ttype['<<'][''][''] = ''
-        # self.ttype['>>'][''][''] = ''
-        self.ttype['<']['int']['int'] = 'int'
-        self.ttype['<']['int']['float'] = 'int'
-        self.ttype['<']['float']['int'] = 'int'
-        self.ttype['<']['float']['int'] = 'int'
-        self.ttype['<']['float']['float'] = 'int'
-        self.ttype['<']['string']['string'] = 'int'
-        self.ttype['>']['int']['int'] = 'int'
-        self.ttype['>']['int']['float'] = 'int'
-        self.ttype['>']['float']['int'] = 'int'
-        self.ttype['>']['float']['int'] = 'int'
-        self.ttype['>']['float']['float'] = 'int'
-        self.ttype['>']['string']['string'] = 'int'
-        self.ttype['==']['int']['int'] = 'int'
-        self.ttype['==']['int']['float'] = 'int'
-        self.ttype['==']['float']['int'] = 'int'
-        self.ttype['==']['float']['int'] = 'int'
-        self.ttype['==']['float']['float'] = 'int'
-        self.ttype['==']['string']['string'] = 'int'
-        self.ttype['!=']['int']['int'] = 'int'
-        self.ttype['!=']['int']['float'] = 'int'
-        self.ttype['!=']['float']['int'] = 'int'
-        self.ttype['!=']['float']['int'] = 'int'
-        self.ttype['!=']['float']['float'] = 'int'
-        self.ttype['!=']['string']['string'] = 'int'
-        self.ttype['<=']['int']['int'] = 'int'
-        self.ttype['<=']['int']['float'] = 'int'
-        self.ttype['<=']['float']['int'] = 'int'
-        self.ttype['<=']['float']['int'] = 'int'
-        self.ttype['<=']['float']['float'] = 'int'
-        self.ttype['<=']['string']['string'] = 'int'
-        self.ttype['<=']['int']['int'] = 'int'
-        self.ttype['<=']['int']['float'] = 'int'
-        self.ttype['<=']['float']['int'] = 'int'
-        self.ttype['<=']['float']['int'] = 'int'
-        self.ttype['<=']['float']['float'] = 'int'
-        self.ttype['<=']['string']['string'] = 'int'
+        self.populateComparisons()
 
-    def populateArithmetical(self):
+
+    def populateArithmetic(self):
 
         for op in '+-*/%':
             self.ttype[op]['int']['float'] = 'float'
@@ -70,6 +32,14 @@ class Ttype(object):
         for op in '&', '^', '|', '&&', '||', '>>', '<<':
             self.ttype[op]['int']['int'] = 'int'
        
+    def populateComparisons(self):
+
+        for op in '<', '>', '==', '!=', '<=', '>=':
+          self.ttype[op]['int']['int'] = 'int'
+          self.ttype[op]['int']['float'] = 'int'
+          self.ttype[op]['float']['int'] = 'int'
+          self.ttype[op]['float']['float'] = 'int'
+          self.ttype[op]['string']['string'] = 'int'
 
     def getTtype(self,op,left,right):
         return self.ttype[op][left][right]
