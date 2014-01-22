@@ -44,5 +44,13 @@ class Interpreter(object):
         node.ext_decls.iaccept(self)
         node.fundefs.iaccept(self)
         node.instrs.iaccept(self)
-        print 'Visited a Program'
-        
+    
+    @when(AST.InstructionList)
+    def visit(self, node):
+        for instr in node.instrs:
+            instr.iaccept(self)
+
+    @when(AST.PrintInstruction)
+    def visit(self, node):
+        print node.expr
+
