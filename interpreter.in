@@ -5,8 +5,18 @@ string bar(string value) {
     return value * foo;
 }
 
-print "5" + "6";
+/*print "5" + "6";
 print 5 + 6;
 print foo;
-print foo * foo;
+print foo * foo;*/
 print foo + 2;
+
+foo = foo - 2;
+
+print foo;
+
+while (foo > 0){
+	foo = foo - 1;
+}
+
+print foo;
