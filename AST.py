@@ -17,10 +17,6 @@ class Node(object):
   def iaccept(self, visitor):
     return visitor.visit(self)
 
-  #accept interpretera:
-  def accept_interpret(self, visitor):
-      return visitor.visit(self)
-
 class ErrorNode(Node):
     pass
 
