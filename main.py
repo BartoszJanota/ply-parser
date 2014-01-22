@@ -5,6 +5,7 @@ import logging.handlers
 import ply.yacc as yacc
 from Cparser import Cparser
 from TypeChecker import TypeChecker
+from Interpreter import Interpreter
 from AST import *
 
 
@@ -39,4 +40,9 @@ if __name__ == '__main__':
     #parser.parse(text, lexer=Cparser.scanner)
     ast = parser.parse(text, lexer=Cparser.scanner)
     ast.accept(TypeChecker())
+
+    # in future
+    # ast.accept_interpret(OptimizationPass1())
+    # ast.accept_interpret(OptimizationPass2())
+    # ast.accept_interpret(CodeGenerator())
 
