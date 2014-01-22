@@ -41,7 +41,7 @@ if __name__ == '__main__':
     ast = parser.parse(text, lexer=Cparser.scanner)
     ast.accept(TypeChecker())
 
-    ast.accept_interpret(Interpreter())
+    ast.iaccept(Interpreter())
 
     # in future
     # ast.accept_interpret(OptimizationPass1())

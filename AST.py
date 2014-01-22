@@ -14,6 +14,9 @@ class Node(object):
       if meth!=None:
           return meth(self, table)
 
+  def iaccept(self, visitor):
+    return visitor.visit(self)
+
   #accept interpretera:
   def accept_interpret(self, visitor):
       return visitor.visit(self)
