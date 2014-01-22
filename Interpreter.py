@@ -9,17 +9,32 @@ from visit import *
 class Interpreter(object):
 
 
+    def __init__(self):
+        self.precompile_operators()
+
     @on('node')
     def visit(self, node):
         pass
 
+    def action_lambda(self, op):
+        return eval('lambda x, y: x ' + op + ' y')
+
+    def precompile_operators(self):
+        self.actions = {}
+        operators = [c for c in "<>+-*/%&|^"] + ['<=', '>=', '==', '!=', '<<', '>>']
+
+        for op in operators:
+            self.actions[op] = self.action_lambda(op)
+
+        self.actions['&&'] = self.action_lambda('and')
+        self.actions['||'] = self.action_lambda('or')
+
     @when(AST.BinExpr)
     def visit(self, node):
-        r1 = node.left.accept(self)
-        r2 = node.right.accept(self)
-        # try sth smarter than:
-        # if(node.op=='+') return r1+r2
-        # elsif(node.op=='-') ...
+        r1 = node.left.iaccept(self)[0]
+        r2 = node.right.iaccept(self)[0]
+
+        return self.actions[node.op](r1, r2)
 
 
     @when(AST.Assignment)
@@ -52,5 +67,5 @@ class Interpreter(object):
 
     @when(AST.PrintInstruction)
     def visit(self, node):
-        print node.expr
+        print node.expr.iaccept(self)
 

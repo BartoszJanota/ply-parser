@@ -1,8 +1,11 @@
 
 int foo = 5;
 
-int bar(string value) {
+string bar(string value) {
     return value * foo;
 }
 
+print "5" + "6";
+print 5 + 6;
 print foo;
+
