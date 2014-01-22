@@ -8,12 +8,9 @@ from visit import *
 
 class Interpreter(object):
 
-    def __init__():
+    def __init__(self):
         self.globalMemory = MemoryStack(Memory("globalMemory"))
         self.functionMemory = MemoryStack(Memory("functionMemory"))
-
-
-    def __init__(self):
         self.precompile_operators()
 
     @on('node')
@@ -73,12 +70,12 @@ class Interpreter(object):
     def visit(self, node):
         print node.expr.iaccept(self)
 
-    @when(AST.Variable):
+    @when(AST.Variable)
     def visit(self, node):
         localVar = self.functionMemory.get(node.id)
         if localVar:
             return localVar
-        else
+        else:
             return self.globalMemory.get(node.id)
 
     @when(AST.DeclarationList)
@@ -90,12 +87,12 @@ class Interpreter(object):
     def visit(self, node): 
         node.inits.iaccept(self)
 
-    @when(AST.InitList):
+    @when(AST.InitList)
     def visit(self, node):
         for init in node.inits:
             init.iaccept(self)
 
-    @when(AST.Init):
+    @when(AST.Init)
     def visit(self, node):
         val = node.expr.iaccept(self)
         self.globalMemory.put(node.id, val)

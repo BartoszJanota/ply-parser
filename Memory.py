@@ -18,7 +18,7 @@ class Memory:
 class MemoryStack:
                                                                              
     def __init__(self, memory=None): # initialize memory stack with memory <memory>
-    	self.stack = list(memory)
+    	self.stack = [  memory ]
 
     def get(self, name):             # get from memory stack current value of variable <name>
     	self.stack[-1].get(name)
