@@ -1,12 +1,16 @@
 
 import AST
 import SymbolTable
-#from Memory import *
+from Memory import *
 from Exceptions import  *
 from visit import *
 
 
 class Interpreter(object):
+
+    def __init__():
+        self.globalMemory = MemoryStack(Memory("globalMemory"))
+        self.functionMemory = MemoryStack(Memory("functionMemory"))
 
 
     def __init__(self):
@@ -68,4 +72,31 @@ class Interpreter(object):
     @when(AST.PrintInstruction)
     def visit(self, node):
         print node.expr.iaccept(self)
+
+    @when(AST.Variable):
+    def visit(self, node):
+        localVar = self.functionMemory.get(node.id)
+        if localVar:
+            return localVar
+        else
+            return self.globalMemory.get(node.id)
+
+    @when(AST.DeclarationList)
+    def visit(self, node):
+        for decl in node.decls:
+            decl.iaccept(self)
+
+    @when(AST.Declaration)
+    def visit(self, node): 
+        node.inits.iaccept(self)
+
+    @when(AST.InitList):
+    def visit(self, node):
+        for init in node.inits:
+            init.iaccept(self)
+
+    @when(AST.Init):
+    def visit(self, node):
+        val = node.expr.iaccept(self)
+        self.globalMemory.put(node.id, val)
 
