@@ -51,7 +51,7 @@ class Interpreter(object):
     def visit(self, node):
         r = None
         while node.cond.accept(self):
-            r = node.body.accept(self)
+            r = node.bodyself. accept(self)
         return r
 
 
@@ -72,11 +72,22 @@ class Interpreter(object):
 
     @when(AST.Variable)
     def visit(self, node):
-        localVar = self.functionMemory.get(node.id)
-        if localVar:
-            return localVar
+        #
+        #
+        # nie wiem dlaczego ten visit zwraca liste ??
+        #
+        #
+        #print node.id
+        variable = self.functionMemory.get(node.id)
+        if variable is not None:
+            #print variable
+            return variable
         else:
-            return self.globalMemory.get(node.id)
+            variable = self.globalMemory.get(node.id)
+            if variable is not None:
+                #print variable
+                return variable
+        return variable
 
     @when(AST.DeclarationList)
     def visit(self, node):

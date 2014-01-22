@@ -8,4 +8,5 @@ string bar(string value) {
 print "5" + "6";
 print 5 + 6;
 print foo;
-
+print foo * foo;
+print foo + 2;

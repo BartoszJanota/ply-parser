@@ -21,7 +21,7 @@ class MemoryStack:
     	self.stack = [  memory ]
 
     def get(self, name):             # get from memory stack current value of variable <name>
-    	self.stack[-1].get(name)
+    	return self.stack[-1].get(name)
 
     def put(self, name, value): # puts into memory stack current value of variable <name>
     	self.stack[-1].put(name, value)
