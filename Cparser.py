@@ -187,11 +187,11 @@ class Cparser(object):
     
     def p_continue_instr(self, p):
         """continue_instr : CONTINUE ';' """
-        p[0] = KeyWordInstruction(p[1])
+        p[0] = ContinueInstruction()
 
     def p_break_instr(self, p):
         """break_instr : BREAK ';' """
-        p[0] = KeyWordInstruction(p[1])    
+        p[0] = BreakInstruction()    
     
     def p_compound_instr(self, p):
         """compound_instr : '{' declarations instructions '}' """

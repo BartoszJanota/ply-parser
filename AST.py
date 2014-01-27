@@ -127,9 +127,13 @@ class WhileInstruction(Node):
     self.cond = cond
     self.instr = instr
 
-class KeyWordInstruction(Node):
-  def __init__(self, kw):
-    self.keyword = kw 
+class ContinueInstruction(Node):
+  def __init__(self):
+    pass
+
+class BreakInstruction(Node):
+  def __init__(self):
+    pass
 
 class CompoundInstructions(Node):
   def __init__(self, decls, instrs):

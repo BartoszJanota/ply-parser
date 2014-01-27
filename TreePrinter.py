@@ -114,9 +114,13 @@ class TreePrinter:
       self.cond.printTree(l+1)
       self.instr.printTree(l+1)
 
-    @addToClass(AST.KeyWordInstruction)
+    @addToClass(AST.BreakInstruction)
     def printTree(self, l):
-      tprint(l, self.keyword.upper())
+      tprint(l, 'BREAK')
+
+    @addToClass(AST.ContinueInstruction)
+    def printTree(self, l):
+      tprint(l, 'CONTINUE')
 
     @addToClass(AST.CompoundInstructions)
     def printTree(self, l):

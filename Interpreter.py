@@ -8,6 +8,12 @@ from visit import *
 
 class Interpreter(object):
 
+    class BreakException(Exception):
+        pass
+
+    class ContinueException(Exception):
+        pass
+
     def __init__(self):
         self.globalMemory = MemoryStack(Memory("globalMemory"))
         self.functionMemory = MemoryStack(Memory("functionMemory"))
@@ -46,14 +52,22 @@ class Interpreter(object):
     def visit(self, node):
         return node.value
 
-    # simplistic while loop interpretation
     @when(AST.WhileInstruction)
     def visit(self, node):
-        r = None
-        while node.cond.iaccept(self):
-            r = node.instr.iaccept(self)
-        return r
 
+        while node.cond.iaccept(self):
+            try:
+                node.instr.iaccept(self)
+            except ContinueException:
+                pass
+
+    @when(AST.ContinueInstruction)
+    def visit(self, node):
+        raise ContinueException        
+
+    @when(AST.BreakInstruction)
+    def visit(self, node):
+        raise BreakException
 
     @when(AST.Program)
     def visit(self, node):
