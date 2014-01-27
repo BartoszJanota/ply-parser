@@ -33,11 +33,7 @@ class Interpreter(object):
     @when(AST.BinExpr)
     def visit(self, node):
         r1 = node.left.iaccept(self)
-        if isinstance(r1, list):
-            r1 = r1[0]
         r2 = node.right.iaccept(self)
-        if isinstance(r2, list):
-            r2 = r2[0]
 
         return self.actions[node.op](r1, r2)
 
@@ -55,7 +51,6 @@ class Interpreter(object):
     def visit(self, node):
         r = None
         while node.cond.iaccept(self):
-            print "loop is spining"
             r = node.instr.iaccept(self)
         return r
 

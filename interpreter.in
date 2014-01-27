@@ -17,6 +17,9 @@ print foo;
 
 while (foo > 0){
 	foo = foo - 1;
+  print "loop is spinning";
+  print 3;
+  print 3.5;
 }
 
 print foo;

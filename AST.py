@@ -15,7 +15,15 @@ class Node(object):
           return meth(self, table)
 
   def iaccept(self, visitor):
-    return visitor.visit(self)
+    result = visitor.visit(self)
+    if isinstance(result, list):
+        if result:
+            return result[0]
+        else:
+            return None
+    else:
+        return result
+
 
 class ErrorNode(Node):
     pass
