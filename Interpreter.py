@@ -17,6 +17,7 @@ class Interpreter(object):
     def __init__(self):
         self.globalMemory = MemoryStack(Memory("globalMemory"))
         self.functionMemory = MemoryStack(Memory("functionMemory"))
+        self.functions = dict()
         self.precompile_operators()
 
     @on('node')
@@ -42,11 +43,6 @@ class Interpreter(object):
         r2 = node.right.iaccept(self)
 
         return self.actions[node.op](r1, r2)
-
-
-    @when(AST.Assignment)
-    def visit(self, node):
-        pass
 
     @when(AST.Const)
     def visit(self, node):
@@ -90,6 +86,26 @@ class Interpreter(object):
         node.decls.iaccept(self)
         node.instrs.iaccept(self)
 
+    @when(AST.FunctionDefList)
+    def visit(self, node):
+        for fundef in node.fundefs:
+            self.functions[fundef.name] = fundef
+
+    @when(AST.FunctionCall)
+    def visit(self, node):
+        
+        function = self.functions[node.id]
+        self.functionMemory.push(Memory(node.id))
+
+        actual_params = node.params.exprs
+        formal_params = function.fmlparams.args
+
+        for actual, formal in zip(actual_params, formal_params):
+            actual_value = actual.iaccept(self)
+            self.functionMemory.put(formal.id, actual_value)
+
+        function.body.iaccept(self)
+        self.functionMemory.pop()
 
     @when(AST.PrintInstruction)
     def visit(self, node):

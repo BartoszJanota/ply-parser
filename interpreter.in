@@ -2,6 +2,7 @@
 int foo = 5;
 
 string bar(string value) {
+    print "Visited bar('" + value + "')";
     return value * foo;
 }
 
@@ -28,4 +29,6 @@ while (foo > 0){
 }
 
 print foo;
+
+print bar("qux");
 
