@@ -16,11 +16,16 @@ foo = foo - 2;
 print foo;
 
 while (foo > 0){
-	foo = foo - 1;  
-  print "loop is spinning";
-  print 3;
-  continue;
-  print 3.5;
+  while (foo > 0){
+    foo = foo - 1;  
+    print "loop is spinning";
+    print 3;
+    continue;
+    print 3.5;
+  }
+  break;
+  foo = foo ^ 3;
 }
 
 print foo;
+

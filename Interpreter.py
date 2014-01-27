@@ -55,11 +55,14 @@ class Interpreter(object):
     @when(AST.WhileInstruction)
     def visit(self, node):
 
-        while node.cond.iaccept(self):
-            try:
-                node.instr.iaccept(self)
-            except ContinueException:
-                pass
+        try:
+          while node.cond.iaccept(self):
+              try:
+                  node.instr.iaccept(self)
+              except ContinueException:
+                  pass
+        except BreakException:
+            pass
 
     @when(AST.ContinueInstruction)
     def visit(self, node):
