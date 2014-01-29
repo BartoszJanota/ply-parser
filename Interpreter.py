@@ -34,7 +34,7 @@ class Interpreter(object):
         self.actions = {}
         operators = [c for c in "<>+-*/%&|^"] + ['<=', '>=', '==', '!=', '<<', '>>']
 
-        for op in operators:
+        for op in operators:    
             self.actions[op] = self.action_lambda(op)
 
         self.actions['&&'] = self.action_lambda('and')
@@ -84,10 +84,16 @@ class Interpreter(object):
 
     @when(AST.CompoundInstructions)
     def visit(self, node):
-        #to jest do naprawy!!
-        #bo jak zadeklarujesz cos to sie ma odlozyc na lokalnym stosie
-        node.decls.iaccept(self)
-        node.instrs.iaccept(self)
+        print 'CmpdInst start'
+        try:
+            self.memory.push(Memory('localCompound'))
+            node.decls.iaccept(self)
+            node.instrs.iaccept(self)
+            self.memory.pop()
+        finally:
+            # cos tu nie chce dzialac, w ogole tak to ma mniej wiecej byc?
+            #self.memory.pop()
+            print 'CmpdInst stop'
 
     @when(AST.FunctionDefList)
     def visit(self, node):
