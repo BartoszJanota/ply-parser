@@ -19,8 +19,7 @@ class Interpreter(object):
             self.value = value
 
     def __init__(self):
-        self.globalMemory = MemoryStack(Memory("globalMemory"))
-        self.functionMemory = MemoryStack(Memory("functionMemory"))
+        self.memory = MemoryStack(Memory("Memory"))
         self.functions = dict()
         self.precompile_operators()
 
@@ -99,7 +98,7 @@ class Interpreter(object):
     def visit(self, node):
         
         function = self.functions[node.id]
-        self.functionMemory.push(Memory(node.id))
+        self.memory.push(Memory(node.id))
 
         actual_params = node.params.exprs
         formal_params = function.fmlparams.args
@@ -107,7 +106,7 @@ class Interpreter(object):
         for actual, formal in zip(actual_params, formal_params):
             actual_value = actual.iaccept(self)
             print 'Calling', node.id, 'with', formal.id, actual_value
-            self.functionMemory.put(formal.id, actual_value)
+            self.memory.put(formal.id, actual_value)
 
         result = None
         try:
@@ -116,7 +115,7 @@ class Interpreter(object):
             result = ret.value
             print 'Result =', result
         
-        self.functionMemory.pop()
+        self.memory.pop()
         return result
 
     @when(AST.ReturnInstruction)
@@ -131,11 +130,11 @@ class Interpreter(object):
     @when(AST.Variable)
     def visit(self, node):
 
-        variable = self.functionMemory.get(node.id)
+        variable = self.memory.get(node.id)
         if variable != None:
             return variable
         else:
-            variable = self.globalMemory.get(node.id)
+            variable = self.memory.get(node.id)
             if variable != None:           
                 return variable
         return None
@@ -157,13 +156,13 @@ class Interpreter(object):
     @when(AST.Init)
     def visit(self, node):
         val = node.expr.iaccept(self)
-        self.globalMemory.put(node.id, val)
+        self.memory.put(node.id, val)
 
     @when(AST.Assignment)
     def visit(self, node):
         r2 = node.expr.iaccept(self)
         if r2 is not None:
-            if self.functionMemory.get(node.id) is not None:
-                self.functionMemory.put(node.id, r2)
+            if self.memory.get(node.id) is not None:
+                self.memory.put(node.id, r2)
             else:
-                self.globalMemory.put(node.id, r2) 
+                self.memory.put(node.id, r2) 
