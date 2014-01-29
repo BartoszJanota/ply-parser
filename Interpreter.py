@@ -14,6 +14,10 @@ class Interpreter(object):
     class ContinueException(Exception):
         pass
 
+    class ReturnException(Exception):
+        def __init__(self, value):
+            self.value = value
+
     def __init__(self):
         self.globalMemory = MemoryStack(Memory("globalMemory"))
         self.functionMemory = MemoryStack(Memory("functionMemory"))
@@ -99,13 +103,26 @@ class Interpreter(object):
 
         actual_params = node.params.exprs
         formal_params = function.fmlparams.args
-
+        
         for actual, formal in zip(actual_params, formal_params):
             actual_value = actual.iaccept(self)
+            print 'Calling', node.id, 'with', formal.id, actual_value
             self.functionMemory.put(formal.id, actual_value)
 
-        function.body.iaccept(self)
+        result = None
+        try:
+            function.body.iaccept(self)
+        except self.ReturnException as ret:            
+            result = ret.value
+            print 'Result =', result
+        
         self.functionMemory.pop()
+        return result
+
+    @when(AST.ReturnInstruction)
+    def visit(self, node):
+        result = node.expr.iaccept(self)
+        raise self.ReturnException(result)
 
     @when(AST.PrintInstruction)
     def visit(self, node):
@@ -113,22 +130,15 @@ class Interpreter(object):
 
     @when(AST.Variable)
     def visit(self, node):
-        #
-        #
-        # nie wiem dlaczego ten visit zwraca liste ??
-        #
-        #
-        #print node.id
+
         variable = self.functionMemory.get(node.id)
-        if variable is not None:
-            #print variable
+        if variable != None:
             return variable
         else:
             variable = self.globalMemory.get(node.id)
-            if variable is not None:
-                #print variable
+            if variable != None:           
                 return variable
-        return variable
+        return None
 
     @when(AST.DeclarationList)
     def visit(self, node):

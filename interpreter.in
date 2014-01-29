@@ -1,9 +1,19 @@
 
 int foo = 5;
 
-string bar(string value) {
-    print "Visited bar('" + value + "')";
-    return value * foo;
+string multiply(string value, int count) {
+    print "Visited multiply('" + value + "', " + count ")";
+    return value * count;
+}
+
+string foo_multiply(string value) {
+ 
+    print "Visited foo_multiply('" + value + "')";
+    return multiply(value, foo);
+}
+
+string xyzs(int count) {
+    return multiply("xyz", count);
 }
 
 /*print "5" + "6";
@@ -29,6 +39,10 @@ while (foo > 0){
 }
 
 print foo;
+foo = 4;
 
-print bar("qux");
+print foo_multiply("qux");
+print multiply("qux", 3);
+print xyzs(2);
+
 

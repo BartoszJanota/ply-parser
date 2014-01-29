@@ -21,7 +21,12 @@ class MemoryStack:
     	self.stack = [  memory ]
 
     def get(self, name):             # get from memory stack current value of variable <name>
-    	return self.stack[-1].get(name)
+    	for mem in reversed(self.stack):
+            val = mem.get(name)
+            if val != None: 
+                return val
+
+        return None
 
     def put(self, name, value): # puts into memory stack current value of variable <name>
     	self.stack[-1].put(name, value)
@@ -31,4 +36,10 @@ class MemoryStack:
 
     def pop(self):          # pops the top memory from the stack
     	self.stack.pop()
+
+    def report(self, name):
+
+        print name, 'memory:'
+    	for mem in reversed(self.stack):
+            print mem.table
 
