@@ -48,8 +48,6 @@ print xyzs(2);
 
 if (3 > 1 + 1){
 	print "cond == true";
-	break;
-	print "after break"
 } else {
 	print "cond == false";
 }

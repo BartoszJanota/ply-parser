@@ -1,0 +1,156 @@
+Syntax error in print instruction at line 6, column 56, at token LexToken(STRING, '")"')
+DECL
+| int
+| | =
+| | | foo
+| | | 5
+DECL
+| int
+| | =
+| | | i
+| | | 1
+FUNDEF
+| multiply
+| RET
+| | string
+| ARG
+| | string
+| | value
+| ARG
+| | int
+| | count
+| RETURN
+| | *
+| | | value
+| | | count
+FUNDEF
+| foo_multiply
+| RET
+| | string
+| ARG
+| | string
+| | value
+| PRINT
+| | +
+| | | +
+| | | | "Visited foo_multiply('"
+| | | | value
+| | | "')"
+| RETURN
+| | FUNCALL 
+| | | multiply
+| | | value
+| | | foo
+FUNDEF
+| xyzs
+| RET
+| | string
+| ARG
+| | int
+| | count
+| RETURN
+| | FUNCALL 
+| | | multiply
+| | | "xyz"
+| | | count
+PRINT
+| +
+| | foo
+| | 2
+=
+| foo
+| -
+| | foo
+| | 2
+PRINT
+| foo
+WHILE
+| >
+| | foo
+| | 0
+| WHILE
+| | >
+| | | foo
+| | | 0
+| | =
+| | | foo
+| | | -
+| | | | foo
+| | | | 1
+| | PRINT
+| | | "loop is spinning"
+| | PRINT
+| | | 3
+| | CONTINUE
+| | PRINT
+| | | 3.5
+| BREAK
+| =
+| | foo
+| | ^
+| | | foo
+| | | 3
+PRINT
+| foo
+=
+| foo
+| 4
+PRINT
+| FUNCALL 
+| | foo_multiply
+| | "qux"
+PRINT
+| FUNCALL 
+| | multiply
+| | "qux"
+| | 3
+PRINT
+| FUNCALL 
+| | xyzs
+| | 2
+IF
+| >
+| | 3
+| | +
+| | | 1
+| | | 1
+| THEN
+| | PRINT
+| | | "cond == true"
+| ELSE
+| | PRINT
+| | | "cond == false"
+=
+| i
+| 2
+REPEAT
+| =
+| | i
+| | +
+| | | i
+| | | 1
+| PRINT
+| | i
+UNTIL
+| <
+| | i
+| | 7
+7
+3
+loop is spinning
+3
+loop is spinning
+3
+loop is spinning
+3
+0
+Visited foo_multiply('qux')
+quxquxquxqux
+quxquxqux
+xyzxyz
+cond == true
+3
+4
+5
+6
+7

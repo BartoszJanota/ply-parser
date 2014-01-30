@@ -82,9 +82,8 @@ class Interpreter(object):
                     node.instrs.iaccept(self)
                 except ContinueException:
                     pass
-                else:
-                    if not node.cond.iaccept(self):
-                        break
+                if not node.cond.iaccept(self):
+                    break
         except BreakException:
             #print "BreakException in repeat instruction"
             pass
