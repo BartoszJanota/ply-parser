@@ -71,23 +71,23 @@ class Interpreter(object):
             else:
                 node.ielse.iaccept(self)
         except BreakException:
-            print "BreakException in choice instruction"
+            #print "BreakException in choice instruction"
+            pass
 
     @when(AST.RepeatInstruction)
     def visit(self, node):
         try:
             while True:
                 try:
-                #self.memory.report('repeat')
                     node.instrs.iaccept(self)
-                #self.memory.report('repeat')
                 except ContinueException:
                     pass
                 else:
                     if not node.cond.iaccept(self):
                         break
         except BreakException:
-            print "BreakException in repeat instruction"
+            #print "BreakException in repeat instruction"
+            pass
 
     @when(AST.ContinueInstruction)
     def visit(self, node):
@@ -133,7 +133,7 @@ class Interpreter(object):
         
         for actual, formal in zip(actual_params, formal_params):
             actual_value = actual.iaccept(self)
-            print 'Calling', node.id, 'with', formal.id, actual_value
+            #print 'Calling', node.id, 'with', formal.id, actual_value
             self.memory.put(formal.id, actual_value)
 
         result = None
@@ -141,7 +141,7 @@ class Interpreter(object):
             function.body.iaccept(self)
         except self.ReturnException as ret:            
             result = ret.value
-            print 'Result =', result
+            #print 'Result =', result
         
         self.memory.pop()
         return result
