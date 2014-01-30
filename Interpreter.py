@@ -63,6 +63,17 @@ class Interpreter(object):
         except BreakException:
             pass
 
+    @when(AST.ChoiceInstruction)
+    def visit(self, node):
+        try:
+            if node.cond.iaccept(self):
+                node.ithen.iaccept(self)
+            else:
+                node.ielse.iaccept(self)
+        except BreakException:
+            print "BreakException in choice"
+
+
     @when(AST.ContinueInstruction)
     def visit(self, node):
         raise ContinueException        

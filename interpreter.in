@@ -45,4 +45,12 @@ print foo_multiply("qux");
 print multiply("qux", 3);
 print xyzs(2);
 
+if (3 > 1 + 1){
+	print "cond == true";
+	break;
+	print "after break"
+} else {
+	print "cond == false";
+}
+
 
