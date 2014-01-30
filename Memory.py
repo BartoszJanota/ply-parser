@@ -18,7 +18,7 @@ class Memory:
 class MemoryStack:
                                                                              
     def __init__(self, memory=None): # initialize memory stack with memory <memory>
-    	self.stack = [  memory ]
+    	self.stack = [ memory ]
 
     def get(self, name):             # get from memory stack current value of variable <name>
     	for mem in reversed(self.stack):
@@ -29,7 +29,13 @@ class MemoryStack:
         return None
 
     def put(self, name, value): # puts into memory stack current value of variable <name>
-    	self.stack[-1].put(name, value)
+    	if self.get(name):
+            for mem in reversed(self.stack):
+                val = mem.get(name)
+                if val != None: 
+                    mem.put(name, value)
+        else:
+            self.stack[-1].put(name, value)
 
     def push(self, memory): # push memory <memory> onto the stack
     	self.stack.append(memory)
