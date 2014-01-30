@@ -1,0 +1,19 @@
+
+int i = 1;
+
+i = 2;
+
+repeat {
+  print "repeat";
+  print i;
+  i = i + 1;
+  print i;
+} until i < 5;
+
+i = 3;
+while (i < 5){
+  print "while";
+  print i;
+  i = i + 1;
+  print i;
+}

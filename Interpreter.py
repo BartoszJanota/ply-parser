@@ -55,11 +55,11 @@ class Interpreter(object):
     def visit(self, node):
 
         try:
-          while node.cond.iaccept(self):
-              try:
-                  node.instr.iaccept(self)
-              except ContinueException:
-                  pass
+            while node.cond.iaccept(self):
+                try:
+                    node.instr.iaccept(self)
+                except ContinueException:
+                    pass
         except BreakException:
             pass
 
@@ -71,8 +71,23 @@ class Interpreter(object):
             else:
                 node.ielse.iaccept(self)
         except BreakException:
-            print "BreakException in choice"
+            print "BreakException in choice instruction"
 
+    @when(AST.RepeatInstruction)
+    def visit(self, node):
+        try:
+            while True:
+                try:
+                #self.memory.report('repeat')
+                    node.instrs.iaccept(self)
+                #self.memory.report('repeat')
+                except ContinueException:
+                    pass
+                else:
+                    if not node.cond.iaccept(self):
+                        break
+        except BreakException:
+            print "BreakException in repeat instruction"
 
     @when(AST.ContinueInstruction)
     def visit(self, node):
