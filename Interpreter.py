@@ -110,16 +110,12 @@ class Interpreter(object):
 
     @when(AST.CompoundInstructions)
     def visit(self, node):
-        print 'CmpdInst start'
         try:
             self.memory.push(Memory('localCompound'))
             node.decls.iaccept(self)
             node.instrs.iaccept(self)
-            self.memory.pop()
         finally:
-            # cos tu nie chce dzialac, w ogole tak to ma mniej wiecej byc?
-            #self.memory.pop()
-            print 'CmpdInst stop'
+            self.memory.pop()
 
     @when(AST.FunctionDefList)
     def visit(self, node):
